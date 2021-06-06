@@ -14,10 +14,8 @@
  (type $i32_f64_i32_=>_i32 (func (param i32 f64 i32) (result i32)))
  (type $i32_f64_=>_none (func (param i32 f64)))
  (type $i32_f64_=>_i32 (func (param i32 f64) (result i32)))
- (type $i32_i32_f64_f64_f64_f64_f64_=>_none (func (param i32 i32 f64 f64 f64 f64 f64)))
  (type $i32_i32_i32_i32_=>_i32 (func (param i32 i32 i32 i32) (result i32)))
  (import "env" "abort" (func $~lib/builtins/abort (param i32 i32 i32 i32)))
- (import "env" "trace" (func $~lib/builtins/trace (param i32 i32 f64 f64 f64 f64 f64)))
  (global $assembly/isotonic/xArrayID i32 (i32.const 3))
  (global $assembly/isotonic/yArrayID i32 (i32.const 3))
  (global $assembly/isotonic/wArrayID i32 (i32.const 3))
@@ -34,10 +32,10 @@
  (global $~lib/ASC_LOW_MEMORY_LIMIT i32 (i32.const 0))
  (global $~lib/ASC_SHRINK_LEVEL i32 (i32.const 0))
  (global $~argumentsLength (mut i32) (i32.const 0))
- (global $~lib/rt/__rtti_base i32 (i32.const 1024))
- (global $~lib/memory/__data_end i32 (i32.const 1100))
- (global $~lib/memory/__stack_pointer (mut i32) (i32.const 17484))
- (global $~lib/memory/__heap_base i32 (i32.const 17484))
+ (global $~lib/rt/__rtti_base i32 (i32.const 992))
+ (global $~lib/memory/__data_end i32 (i32.const 1068))
+ (global $~lib/memory/__stack_pointer (mut i32) (i32.const 17452))
+ (global $~lib/memory/__heap_base i32 (i32.const 17452))
  (memory $0 1)
  (data (i32.const 12) ",\00\00\00\00\00\00\00\00\00\00\00\01\00\00\00\1c\00\00\00I\00n\00v\00a\00l\00i\00d\00 \00l\00e\00n\00g\00t\00h\00")
  (data (i32.const 60) ",\00\00\00\00\00\00\00\00\00\00\00\01\00\00\00\1a\00\00\00~\00l\00i\00b\00/\00a\00r\00r\00a\00y\00.\00t\00s\00\00\00")
@@ -55,10 +53,9 @@
  (data (i32.const 700) "<\00\00\00\00\00\00\00\00\00\00\00\01\00\00\00&\00\00\00~\00l\00i\00b\00/\00a\00r\00r\00a\00y\00b\00u\00f\00f\00e\00r\00.\00t\00s\00\00\00\00\00\00\00")
  (data (i32.const 764) "<\00\00\00\00\00\00\00\00\00\00\00\01\00\00\00(\00\00\00a\00s\00s\00e\00m\00b\00l\00y\00/\00i\00s\00o\00t\00o\00n\00i\00c\00.\00t\00s\00\00\00\00\00")
  (data (i32.const 828) "\1c\00\00\00\00\00\00\00\00\00\00\00\08\00\00\00\08\00\00\00\03\00\00\00\00\00\00\00\00\00\00\00")
- (data (i32.const 860) "\1c\00\00\00\00\00\00\00\00\00\00\00\01\00\00\00\0c\00\00\00H\00e\00r\00e\00!\00!\00")
- (data (i32.const 892) "<\00\00\00\00\00\00\00\00\00\00\00\01\00\00\00*\00\00\00O\00b\00j\00e\00c\00t\00 \00a\00l\00r\00e\00a\00d\00y\00 \00p\00i\00n\00n\00e\00d\00\00\00")
- (data (i32.const 956) "<\00\00\00\00\00\00\00\00\00\00\00\01\00\00\00(\00\00\00O\00b\00j\00e\00c\00t\00 \00i\00s\00 \00n\00o\00t\00 \00p\00i\00n\00n\00e\00d\00\00\00\00\00")
- (data (i32.const 1024) "\t\00\00\00 \00\00\00\00\00\00\00 \00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\02\1a\00\00\00\00\00\00\02A\00\00\00\00\00\00\02\t\00\00\00\00\00\00\00\00\00\00\00\00\00\00\08\1a\00\00\00\00\00\00\00\00\00\00\00\00\00\00")
+ (data (i32.const 860) "<\00\00\00\00\00\00\00\00\00\00\00\01\00\00\00*\00\00\00O\00b\00j\00e\00c\00t\00 \00a\00l\00r\00e\00a\00d\00y\00 \00p\00i\00n\00n\00e\00d\00\00\00")
+ (data (i32.const 924) "<\00\00\00\00\00\00\00\00\00\00\00\01\00\00\00(\00\00\00O\00b\00j\00e\00c\00t\00 \00i\00s\00 \00n\00o\00t\00 \00p\00i\00n\00n\00e\00d\00\00\00\00\00")
+ (data (i32.const 992) "\t\00\00\00 \00\00\00\00\00\00\00 \00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\02\1a\00\00\00\00\00\00\02A\00\00\00\00\00\00\02\t\00\00\00\00\00\00\00\00\00\00\00\00\00\00\08\1a\00\00\00\00\00\00\00\00\00\00\00\00\00\00")
  (table $0 4 funcref)
  (elem $0 (i32.const 1) $assembly/isotonic/lexsort~anonymous|0 $assembly/isotonic/lexsort~anonymous|1 $assembly/isotonic/inplaceIsotonicY~anonymous|0)
  (export "xArrayID" (global $assembly/isotonic/xArrayID))
@@ -4754,7 +4751,7 @@
    i32.const 3
    i32.eq
    if
-    i32.const 912
+    i32.const 880
     i32.const 192
     i32.const 337
     i32.const 7
@@ -4786,7 +4783,7 @@
   i32.const 3
   i32.ne
   if
-   i32.const 976
+   i32.const 944
    i32.const 192
    i32.const 351
    i32.const 5
@@ -4877,10 +4874,10 @@
   i32.const 128
   local.get $0
   call $~lib/rt/itcms/__visit
-  i32.const 912
+  i32.const 880
   local.get $0
   call $~lib/rt/itcms/__visit
-  i32.const 976
+  i32.const 944
   local.get $0
   call $~lib/rt/itcms/__visit
  )
@@ -5099,8 +5096,8 @@
   global.get $~lib/memory/__data_end
   i32.lt_s
   if
-   i32.const 17504
-   i32.const 17552
+   i32.const 17472
+   i32.const 17520
    i32.const 1
    i32.const 1
    call $~lib/builtins/abort
@@ -5318,28 +5315,6 @@
   call $~lib/array/Array<i32>#map<i32>
   local.tee $2
   i32.store offset=8
-  i32.const 880
-  local.set $13
-  global.get $~lib/memory/__stack_pointer
-  local.get $13
-  i32.store
-  local.get $13
-  i32.const 3
-  local.get $2
-  i32.const 0
-  call $~lib/array/Array<i32>#__get
-  f64.convert_i32_s
-  local.get $2
-  i32.const 1
-  call $~lib/array/Array<i32>#__get
-  f64.convert_i32_s
-  local.get $2
-  i32.const 2
-  call $~lib/array/Array<i32>#__get
-  f64.convert_i32_s
-  f64.const 0
-  f64.const 0
-  call $~lib/builtins/trace
   i32.const 0
   local.set $3
   block $while-break|0
@@ -6198,7 +6173,7 @@
   if
    i32.const 0
    i32.const 784
-   i32.const 114
+   i32.const 118
    i32.const 3
    call $~lib/builtins/abort
    unreachable

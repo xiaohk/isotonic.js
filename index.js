@@ -17,23 +17,12 @@ const __getArray = wasm.__getArray;
 const __getArrayView = wasm.__getArrayView;
 
 /**
- * JS wrapper for createArray()
- * @param {*} length Length of the array
- * @returns new array
- */
-const myCreateArray = (length) => {
-  let pointer = __pin(wasmModule.exports.createArray(length));
-  let newArray = __getArray(pointer);
-  return newArray;
-};
-
-/**
  * JS wrapper for the lexsort() from WASM, which sorts x, y, w with the same order
  * and uses x as the first sorting key and y as the secondary sorting key.
  * This function is only used to expose lexsort() for unit testing.
- * @param {number} x x array
- * @param {number} y y array
- * @param {number} w weight array
+ * @param {[number]} x x array
+ * @param {[number]} y y array
+ * @param {[number]} w weight array
  * @param {bool} increasing sort to increasing order
  * @returns sorted [x, y, w] array
  */
@@ -65,9 +54,9 @@ const __lexsort = (x, y, w, increasing) => {
  * replace their y's with weighted average, and replace their w's with weight
  * sum. This function assumes that x is sorted. This function is only used to
  * expose lexsort() for unit testing.
- * @param x x array
- * @param y y array
- * @param w weight array
+ * @param {[number]} x x array
+ * @param {[number]} y y array
+ * @param {[number]} w weight array
  * @returns [unique x array, unique y array, unique weight array]
  */
 const __makeUnique = (x, y, w) => {
@@ -90,6 +79,15 @@ const __makeUnique = (x, y, w) => {
   return result;
 };
 
+/**
+ * JS wrapper for the inplaceIsotonicY() from WASM, which Fit the isotonic
+ * regression on y with weight using the Pool Adjacent Violators Algorithm
+ * (PAVA). Internally the array is updated in-place, but the JS y array is
+ * not changed.
+ * @param {[number]} y y array
+ * @param {[number]} w weight array
+ * @returns Fitted y array
+ */
 const __inplaceIsotonicY = (y, w) => {
   let yPtr = __pin(__newArray(wasm.yArrayID, y));
   let wPtr = __pin(__newArray(wasm.wArrayID, w));
@@ -98,16 +96,16 @@ const __inplaceIsotonicY = (y, w) => {
 
   let yArray = __getArray(yPtr);
 
-  console.log(yArray);
+  // Unpin the pointers so they can get collected
+  __unpin(yPtr);
+  __unpin(wPtr);
 
   return yArray;
 };
 
-
 module.exports = wasmModule.exports;
 
 // Add new functions
-module.exports.myCreateArray = myCreateArray;
 module.exports.__lexsort = __lexsort;
 module.exports.__makeUnique = __makeUnique;
 module.exports.__inplaceIsotonicY = __inplaceIsotonicY;
