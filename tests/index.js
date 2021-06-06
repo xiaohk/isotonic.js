@@ -35,16 +35,23 @@ unitTestEqual('add', () => myModule.add(1, 2), 3);
 
 unitTestEqual('add', () => myModule.add(1, 2), 3);
 
-console.log(myModule.createArray(5));
+
 let pointer = __pin(myModule.createArray(5));
-console.log(pointer);
-console.log(__getArray(pointer) === [0, 0, 0, 0, 0]);
-
-let tt = myModule.myCreateArray(10);
-console.log(tt, tt[0]);
-
 assert.deepStrictEqual(__getArray(pointer), [0, 0, 0, 0, 0]);
-console.log(typeof Array(__getArray(pointer)));
+
+unitTestEqual(
+  'Lexsort first',
+  () => myModule.__lexsort([10, 5, 1], [1, 2, 3], [1, 2, 2]),
+  [[1, 5, 10], [3, 2, 1], [2, 2, 1]]
+);
+
+// Test lexsort
+unitTestEqual(
+  'Lexsort secondary',
+  () => myModule.__lexsort([20, 3, 3], [10, 9, 8], [4, 5, 6]),
+  [[3, 3, 20], [8, 9, 10], [6, 5, 4]]
+);
+
 
 // console.log(myModule.lexsort([3, 2, 5, 1], [5, 7, 3, 1]));
 
