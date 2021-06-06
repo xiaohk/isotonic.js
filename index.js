@@ -90,6 +90,19 @@ const __makeUnique = (x, y, w) => {
   return result;
 };
 
+const __inplaceIsotonicY = (y, w) => {
+  let yPtr = __pin(__newArray(wasm.yArrayID, y));
+  let wPtr = __pin(__newArray(wasm.wArrayID, w));
+
+  wasm.inplaceIsotonicY(yPtr, wPtr);
+
+  let yArray = __getArray(yPtr);
+
+  console.log(yArray);
+
+  return yArray;
+};
+
 
 module.exports = wasmModule.exports;
 
@@ -97,3 +110,5 @@ module.exports = wasmModule.exports;
 module.exports.myCreateArray = myCreateArray;
 module.exports.__lexsort = __lexsort;
 module.exports.__makeUnique = __makeUnique;
+module.exports.__inplaceIsotonicY = __inplaceIsotonicY;
+

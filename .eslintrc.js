@@ -30,7 +30,7 @@ module.exports = {
     'babel/object-curly-spacing': 'off',
     'prefer-const': 'off',
     'id-length': 'off',
-    'no-floating-decimal', 'off',
+    'no-floating-decimal': 'off'
   },
   root: true,
   globals: {

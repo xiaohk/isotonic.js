@@ -1,4 +1,11 @@
-// The entry file of the WebAssembly module.
+/**
+ * The entry file of the WebAssembly module.
+ * 
+ * This file implements the Pool Adjacent Violators Algorithm (PAVA) to solve
+ * isotonic regression. It is a port of the scikit-learn's implementation.
+ * 
+ * Author: Jay Wang (jayw@gatech.edu)
+ */
 
 /**
  * Sort x, y, w in place with the same order, and uses x as the first sorting key
@@ -113,6 +120,89 @@ export function makeUnique(x: Array<f64>, y: Array<f64>, w: Array<f64>): Array<A
   return [xOut, yOut, wOut];
 };
 
+/**
+ * Fit the isotonic regression on y with weight using the Pool Adjacent
+ * Violators Algorithm (PAVA).
+ * This function changes the y's value in-place.
+ * @param y y array
+ * @param w weight array
+ */
+export function inplaceIsotonicY(y: Array<f64>, w: Array<f64>): void {
+
+  // `target` is an array of indexes pointing to the end/start of the decreasing
+  // sub-range (to right/left).
+  // The sub-range grows from left to right, right-pointing index points to the
+  // longest decreasing range, and left-pointing index means an end of a smaller
+  // decreasing range
+  // For each small decreasing range, there is one y value (computed by the weighted
+  // average of y's in that range) and one w value (sum of w's in that range)
+  // We init this array with the index at each entry
+  let target = new Array<i32>(y.length).map<i32>((d, i) => i as i32);
+
+  // Left to right iteration to find decreasing sub-ranges
+  let i = 0;
+  while (i < y.length) {
+    // Compare the left pointer and right pointer
+    let k = target[i] + 1;
+    if (k == y.length) {
+      break;
+    }
+    
+    let yLeft = y[i];
+    let yRight = y[k];
+
+    // End of the current range, move left pointer forward
+    if (yLeft < yRight) {
+      i = k;
+      continue;
+    }
+
+    // yRight is still smaller than yLeft
+    // Re-set the accumulating y and w with yLeft
+    let ySum = yLeft * w[i];
+    let wSum = w[i];
+
+    // Move the right pointer forward until it no longer decreases
+    while (true) {
+      let yPreRight = y[k];
+      ySum += yPreRight * w[k];
+      wSum += w[k];
+
+      k = target[k] + 1;
+
+      // Repeat until the current k points to a non-decreasing value
+      if (k == y.length || y[k] >= yPreRight) {
+        // End of the current sub-range
+        // Resolve the y value and w value for this sub-range, and store them
+        // at the left pointer
+        y[i] = ySum / wSum;
+        w[i] = wSum;
+
+        // Update the target array to mark this sub-range (left anr right)
+        target[i] = k - 1;    // Right pointing at the start
+        target[k - 1] = i;    // Left pointing at the end
+
+        // Back track to the last left pointer if possible
+        if (i > 0) {
+          i = target[i - 1];
+        }
+        break;
+      }
+    }
+  }
+
+  // Fill the values between left and right pointers with y values at the
+  // left pointer (create step functions)
+  i = 0;
+  while (i < y.length) {
+    // Find the current right pointer, impute values in between
+    for (let j = i + 1; j < target[i] + 1; j++) {
+      y[j] = y[i];
+    }
+    i = target[i] + 1;
+  }
+
+};
 
 // We need unique array id so we can allocate them in JS
 export const xArrayID = idof<Array<f64>>();

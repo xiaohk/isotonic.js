@@ -125,7 +125,10 @@ unitTestAssert(
   (expected, result) => assert2dCloseTo(expected, result, 1e-6)
 );
 
+y = [64., 63., 45., 62., 56., 57., 77., 81., 89., 90.];
+w = [1.95425644, 0.60684967, 1.2580323, 1.53842068, 1.95195491,
+  0.61440569, 1.25177586, 1.83410405, 0.90062608, 1.95634757];
 
-// console.log(myModule.lexsort([3, 2, 5, 1], [5, 7, 3, 1]));
+myModule.__inplaceIsotonicY(y, w);
 
 console.log('\nPassed all the tests!');
