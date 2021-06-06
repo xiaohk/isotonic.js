@@ -4,10 +4,11 @@
   "description": "Isotonic Regression with WebAssembly",
   "main": "index.js",
   "scripts": {
-    "test": "node tests",
+    "test": "npm run build && node tests",
     "asbuild:untouched": "asc assembly/isotonic.ts --target debug",
     "asbuild:optimized": "asc assembly/isotonic.ts --target release",
-    "asbuild": "npm run asbuild:untouched && npm run asbuild:optimized"
+    "asbuild": "npm run asbuild:untouched && npm run asbuild:optimized",
+    "build": "npm run asbuild:untouched"
   },
   "author": "Jay Wang",
   "license": "MIT",

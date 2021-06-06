@@ -25,9 +25,14 @@ module.exports = {
       'error',
       'always',
     ],
+    'no-console': 'off',
+    'comma-dangle': 'off',
+    'babel/object-curly-spacing': 'off',
+    'prefer-const': 'off'
   },
   root: true,
   globals: {
     i32: 'readonly',
+    f64: 'readonly'
   },
 };
