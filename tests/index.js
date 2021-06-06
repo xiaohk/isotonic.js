@@ -46,16 +46,6 @@ const unitTestAssert = (name, func, target, customAssert) => {
 
 console.log('Start testing...');
 
-unitTestEqual('add', () => myModule.add(1, 2), 3);
-
-unitTestEqual('add', () => myModule.add(1, 2), 3);
-
-unitTestEqual('add', () => myModule.add(1, 2), 3);
-
-
-let pointer = __pin(myModule.createArray(5));
-assert.deepStrictEqual(__getArray(pointer), [0, 0, 0, 0, 0]);
-
 // --- Test lexsort() ---
 
 unitTestEqual(

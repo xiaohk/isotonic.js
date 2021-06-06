@@ -1,9 +1,5 @@
 // The entry file of the WebAssembly module.
 
-export function add(a: i32, b: i32): i32 {
-  return a + b;
-}
-
 /**
  * Sort x, y, w in place with the same order, and uses x as the first sorting key
  * and y as the secondary sorting key.
@@ -117,9 +113,6 @@ export function makeUnique(x: Array<f64>, y: Array<f64>, w: Array<f64>): Array<A
   return [xOut, yOut, wOut];
 };
 
-export function createArray(length: i32): Int32Array {
-  return new Int32Array(length);
-}
 
 // We need unique array id so we can allocate them in JS
 export const xArrayID = idof<Array<f64>>();

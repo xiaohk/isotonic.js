@@ -1,12 +1,12 @@
 (module
  (type $i32_i32_=>_none (func (param i32 i32)))
- (type $i32_i32_=>_i32 (func (param i32 i32) (result i32)))
  (type $i32_=>_i32 (func (param i32) (result i32)))
+ (type $i32_i32_=>_i32 (func (param i32 i32) (result i32)))
  (type $i32_=>_none (func (param i32)))
  (type $i32_i32_i32_=>_none (func (param i32 i32 i32)))
  (type $i32_i32_i32_i32_=>_none (func (param i32 i32 i32 i32)))
- (type $i32_i32_i32_=>_i32 (func (param i32 i32 i32) (result i32)))
  (type $none_=>_none (func))
+ (type $i32_i32_i32_=>_i32 (func (param i32 i32 i32) (result i32)))
  (type $i32_i32_f64_=>_none (func (param i32 i32 f64)))
  (type $none_=>_i32 (func (result i32)))
  (type $i32_i32_=>_f64 (func (param i32 i32) (result f64)))
@@ -33,9 +33,9 @@
  (global $~lib/ASC_SHRINK_LEVEL i32 (i32.const 0))
  (global $~argumentsLength (mut i32) (i32.const 0))
  (global $~lib/rt/__rtti_base i32 (i32.const 960))
- (global $~lib/memory/__data_end i32 (i32.const 1036))
- (global $~lib/memory/__stack_pointer (mut i32) (i32.const 17420))
- (global $~lib/memory/__heap_base i32 (i32.const 17420))
+ (global $~lib/memory/__data_end i32 (i32.const 1028))
+ (global $~lib/memory/__stack_pointer (mut i32) (i32.const 17412))
+ (global $~lib/memory/__heap_base i32 (i32.const 17412))
  (memory $0 1)
  (data (i32.const 12) ",\00\00\00\00\00\00\00\00\00\00\00\01\00\00\00\1c\00\00\00I\00n\00v\00a\00l\00i\00d\00 \00l\00e\00n\00g\00t\00h\00")
  (data (i32.const 60) ",\00\00\00\00\00\00\00\00\00\00\00\01\00\00\00\1a\00\00\00~\00l\00i\00b\00/\00a\00r\00r\00a\00y\00.\00t\00s\00\00\00")
@@ -54,11 +54,9 @@
  (data (i32.const 764) "<\00\00\00\00\00\00\00\00\00\00\00\01\00\00\00(\00\00\00a\00s\00s\00e\00m\00b\00l\00y\00/\00i\00s\00o\00t\00o\00n\00i\00c\00.\00t\00s\00\00\00\00\00")
  (data (i32.const 828) "<\00\00\00\00\00\00\00\00\00\00\00\01\00\00\00*\00\00\00O\00b\00j\00e\00c\00t\00 \00a\00l\00r\00e\00a\00d\00y\00 \00p\00i\00n\00n\00e\00d\00\00\00")
  (data (i32.const 892) "<\00\00\00\00\00\00\00\00\00\00\00\01\00\00\00(\00\00\00O\00b\00j\00e\00c\00t\00 \00i\00s\00 \00n\00o\00t\00 \00p\00i\00n\00n\00e\00d\00\00\00\00\00")
- (data (i32.const 960) "\t\00\00\00 \00\00\00\00\00\00\00 \00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\02\1a\00\00\00\00\00\00\02A\00\00\00\00\00\00\02\t\00\00\00\00\00\00\00\00\00\00\00\00\00\00\08\1a\00\00\00\00\00\00\01\t\00\00\02\00\00\00")
+ (data (i32.const 960) "\08\00\00\00 \00\00\00\00\00\00\00 \00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\02\1a\00\00\00\00\00\00\02A\00\00\00\00\00\00\02\t\00\00\00\00\00\00\00\00\00\00\00\00\00\00\08\1a\00\00\00\00\00\00")
  (table $0 3 funcref)
  (elem $0 (i32.const 1) $assembly/isotonic/lexsort~anonymous|0 $assembly/isotonic/lexsort~anonymous|1)
- (export "add" (func $assembly/isotonic/add))
- (export "createArray" (func $assembly/isotonic/createArray))
  (export "xArrayID" (global $assembly/isotonic/xArrayID))
  (export "yArrayID" (global $assembly/isotonic/yArrayID))
  (export "wArrayID" (global $assembly/isotonic/wArrayID))
@@ -72,11 +70,6 @@
  (export "lexsort" (func $export:assembly/isotonic/lexsort@varargs))
  (export "makeUnique" (func $export:assembly/isotonic/makeUnique))
  (start $~start)
- (func $assembly/isotonic/add (param $0 i32) (param $1 i32) (result i32)
-  local.get $0
-  local.get $1
-  i32.add
- )
  (func $~lib/rt/itcms/Object#set:nextWithColor (param $0 i32) (param $1 i32)
   local.get $0
   local.get $1
@@ -4623,30 +4616,6 @@
   local.get $0
   i32.load offset=20
  )
- (func $~lib/arraybuffer/ArrayBufferView#set:buffer (param $0 i32) (param $1 i32)
-  local.get $0
-  local.get $1
-  i32.store
-  local.get $0
-  local.get $1
-  i32.const 0
-  call $~lib/rt/itcms/__link
- )
- (func $~lib/arraybuffer/ArrayBufferView#set:dataStart (param $0 i32) (param $1 i32)
-  local.get $0
-  local.get $1
-  i32.store offset=4
- )
- (func $~lib/arraybuffer/ArrayBufferView#set:byteLength (param $0 i32) (param $1 i32)
-  local.get $0
-  local.get $1
-  i32.store offset=8
- )
- (func $assembly/isotonic/createArray (param $0 i32) (result i32)
-  i32.const 0
-  local.get $0
-  call $~lib/typedarray/Int32Array#constructor
- )
  (func $assembly/isotonic/lexsort@varargs (param $0 i32) (param $1 i32) (param $2 i32) (param $3 i32)
   block $1of1
    block $0of1
@@ -4928,65 +4897,54 @@
   local.get $1
   call $~lib/set/Set<f64>#__visit
  )
- (func $~lib/typedarray/Int32Array~visit (param $0 i32) (param $1 i32)
-  local.get $0
-  local.get $1
-  call $~lib/arraybuffer/ArrayBufferView~visit
- )
  (func $~lib/rt/__visit_members (param $0 i32) (param $1 i32)
   block $invalid
-   block $~lib/typedarray/Int32Array
-    block $~lib/set/Set<f64>
-     block $~lib/function/Function<%28~lib/array/Array<f64>%2C~lib/array/Array<f64>%29=>i32>
-      block $~lib/array/Array<i32>
-       block $~lib/array/Array<~lib/array/Array<f64>>
-        block $~lib/array/Array<f64>
-         block $~lib/arraybuffer/ArrayBufferView
-          block $~lib/string/String
-           block $~lib/arraybuffer/ArrayBuffer
-            local.get $0
-            i32.const 8
-            i32.sub
-            i32.load
-            br_table $~lib/arraybuffer/ArrayBuffer $~lib/string/String $~lib/arraybuffer/ArrayBufferView $~lib/array/Array<f64> $~lib/array/Array<~lib/array/Array<f64>> $~lib/array/Array<i32> $~lib/function/Function<%28~lib/array/Array<f64>%2C~lib/array/Array<f64>%29=>i32> $~lib/set/Set<f64> $~lib/typedarray/Int32Array $invalid
-           end
-           return
+   block $~lib/set/Set<f64>
+    block $~lib/function/Function<%28~lib/array/Array<f64>%2C~lib/array/Array<f64>%29=>i32>
+     block $~lib/array/Array<i32>
+      block $~lib/array/Array<~lib/array/Array<f64>>
+       block $~lib/array/Array<f64>
+        block $~lib/arraybuffer/ArrayBufferView
+         block $~lib/string/String
+          block $~lib/arraybuffer/ArrayBuffer
+           local.get $0
+           i32.const 8
+           i32.sub
+           i32.load
+           br_table $~lib/arraybuffer/ArrayBuffer $~lib/string/String $~lib/arraybuffer/ArrayBufferView $~lib/array/Array<f64> $~lib/array/Array<~lib/array/Array<f64>> $~lib/array/Array<i32> $~lib/function/Function<%28~lib/array/Array<f64>%2C~lib/array/Array<f64>%29=>i32> $~lib/set/Set<f64> $invalid
           end
           return
          end
-         local.get $0
-         local.get $1
-         call $~lib/arraybuffer/ArrayBufferView~visit
          return
         end
         local.get $0
         local.get $1
-        call $~lib/array/Array<f64>~visit
+        call $~lib/arraybuffer/ArrayBufferView~visit
         return
        end
        local.get $0
        local.get $1
-       call $~lib/array/Array<~lib/array/Array<f64>>~visit
+       call $~lib/array/Array<f64>~visit
        return
       end
       local.get $0
       local.get $1
-      call $~lib/array/Array<i32>~visit
+      call $~lib/array/Array<~lib/array/Array<f64>>~visit
       return
      end
      local.get $0
      local.get $1
-     call $~lib/function/Function<%28~lib/array/Array<f64>%2C~lib/array/Array<f64>%29=>i32>~visit
+     call $~lib/array/Array<i32>~visit
      return
     end
     local.get $0
     local.get $1
-    call $~lib/set/Set<f64>~visit
+    call $~lib/function/Function<%28~lib/array/Array<f64>%2C~lib/array/Array<f64>%29=>i32>~visit
     return
    end
    local.get $0
    local.get $1
-   call $~lib/typedarray/Int32Array~visit
+   call $~lib/set/Set<f64>~visit
    return
   end
   unreachable
@@ -5864,7 +5822,7 @@
   if
    i32.const 0
    i32.const 784
-   i32.const 115
+   i32.const 111
    i32.const 3
    call $~lib/builtins/abort
    unreachable
@@ -5901,114 +5859,6 @@
   i32.add
   global.set $~lib/memory/__stack_pointer
   local.get $15
- )
- (func $~lib/arraybuffer/ArrayBufferView#constructor (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
-  (local $3 i32)
-  (local $4 i32)
-  global.get $~lib/memory/__stack_pointer
-  i32.const 8
-  i32.sub
-  global.set $~lib/memory/__stack_pointer
-  call $~stack_check
-  global.get $~lib/memory/__stack_pointer
-  i64.const 0
-  i64.store
-  local.get $0
-  i32.eqz
-  if
-   global.get $~lib/memory/__stack_pointer
-   i32.const 12
-   i32.const 2
-   call $~lib/rt/itcms/__new
-   local.tee $0
-   i32.store
-  end
-  local.get $0
-  i32.const 0
-  call $~lib/arraybuffer/ArrayBufferView#set:buffer
-  local.get $0
-  i32.const 0
-  call $~lib/arraybuffer/ArrayBufferView#set:dataStart
-  local.get $0
-  i32.const 0
-  call $~lib/arraybuffer/ArrayBufferView#set:byteLength
-  local.get $1
-  i32.const 1073741820
-  local.get $2
-  i32.shr_u
-  i32.gt_u
-  if
-   i32.const 32
-   i32.const 720
-   i32.const 18
-   i32.const 57
-   call $~lib/builtins/abort
-   unreachable
-  end
-  global.get $~lib/memory/__stack_pointer
-  local.get $1
-  local.get $2
-  i32.shl
-  local.tee $1
-  i32.const 0
-  call $~lib/rt/itcms/__new
-  local.tee $3
-  i32.store offset=4
-  local.get $3
-  i32.const 0
-  local.get $1
-  call $~lib/memory/memory.fill
-  local.get $0
-  local.get $3
-  call $~lib/arraybuffer/ArrayBufferView#set:buffer
-  local.get $0
-  local.get $3
-  call $~lib/arraybuffer/ArrayBufferView#set:dataStart
-  local.get $0
-  local.get $1
-  call $~lib/arraybuffer/ArrayBufferView#set:byteLength
-  local.get $0
-  local.set $4
-  global.get $~lib/memory/__stack_pointer
-  i32.const 8
-  i32.add
-  global.set $~lib/memory/__stack_pointer
-  local.get $4
- )
- (func $~lib/typedarray/Int32Array#constructor (param $0 i32) (param $1 i32) (result i32)
-  (local $2 i32)
-  global.get $~lib/memory/__stack_pointer
-  i32.const 4
-  i32.sub
-  global.set $~lib/memory/__stack_pointer
-  call $~stack_check
-  global.get $~lib/memory/__stack_pointer
-  i32.const 0
-  i32.store
-  local.get $0
-  i32.eqz
-  if
-   global.get $~lib/memory/__stack_pointer
-   i32.const 12
-   i32.const 8
-   call $~lib/rt/itcms/__new
-   local.tee $0
-   i32.store
-  end
-  global.get $~lib/memory/__stack_pointer
-  local.get $0
-  local.get $1
-  i32.const 2
-  call $~lib/arraybuffer/ArrayBufferView#constructor
-  local.tee $0
-  i32.store
-  local.get $0
-  local.set $2
-  global.get $~lib/memory/__stack_pointer
-  i32.const 4
-  i32.add
-  global.set $~lib/memory/__stack_pointer
-  local.get $2
  )
  (func $export:assembly/isotonic/lexsort@varargs (param $0 i32) (param $1 i32) (param $2 i32) (param $3 i32)
   global.get $~lib/memory/__stack_pointer

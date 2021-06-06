@@ -82,6 +82,11 @@ const __makeUnique = (x, y, w) => {
   let result = __getArray(resultPtr);
   result = result.map((d) => __getArray(d));
 
+  // Unpin the pointers so they can get collected
+  __unpin(xPtr);
+  __unpin(yPtr);
+  __unpin(wPtr);
+
   return result;
 };
 
