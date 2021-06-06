@@ -34,16 +34,17 @@ const myCreateArray = (length) => {
  * @param {number} x x array
  * @param {number} y y array
  * @param {number} w weight array
+ * @param {bool} increasing sort to increasing order
  * @returns sorted [x, y, w] array
  */
-const __lexsort = (x, y, w) => {
+const __lexsort = (x, y, w, increasing) => {
   // Create a new array in JS
   let xPtr = __pin(__newArray(wasm.xArrayID, x));
   let yPtr = __pin(__newArray(wasm.yArrayID, y));
   let wPtr = __pin(__newArray(wasm.wArrayID, w));
 
   // Lexsort using WASM
-  wasm.lexsort(xPtr, yPtr, wPtr);
+  wasm.lexsort(xPtr, yPtr, wPtr, increasing);
 
   // Convert pointer to JS arrays
   let xArray = __getArray(xPtr);
