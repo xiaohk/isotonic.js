@@ -28,7 +28,9 @@ module.exports = {
     'no-console': 'off',
     'comma-dangle': 'off',
     'babel/object-curly-spacing': 'off',
-    'prefer-const': 'off'
+    'prefer-const': 'off',
+    'id-length': 'off',
+    'no-floating-decimal', 'off',
   },
   root: true,
   globals: {

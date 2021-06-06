@@ -1,9 +1,17 @@
-// The entry file of your WebAssembly module.
+// The entry file of the WebAssembly module.
 
 export function add(a: i32, b: i32): i32 {
   return a + b;
 }
 
+/**
+ * Sort x, y, w in place with the same order, and uses x as the first sorting key
+ * and y as the secondary sorting key.
+ * @param x x array
+ * @param y y array
+ * @param w weight array
+ * @param increasing if sorting (x, y, z) with an increasing order
+ */
 export function lexsort(x: Array<f64>, y: Array<f64>, w: Array<f64>, increasing: bool=true) :void {
   // Bundle three arrays into one before sorting
   let combinedArray = new Array<Array<f64>>(x.length);
@@ -47,6 +55,67 @@ export function lexsort(x: Array<f64>, y: Array<f64>, w: Array<f64>, increasing:
     w[i] = combinedArray[i][2];
   }
 }
+
+/**
+ * Drop the duplicate x, replace their y's with weighted average, and replace
+ * their w's with weight sum. This function assumes that x is sorted.
+ * @param x x array
+ * @param y y array
+ * @param w weight array
+ * @returns [unique x array, unique y array, unique weight array]
+ */
+export function makeUnique(x: Array<f64>, y: Array<f64>, w: Array<f64>): Array<Array<f64>> {
+
+  // Count the unique values in x
+  let xUniqueSet = new Set<f64>();
+  for (let i = 0; i < x.length; i++) {
+    xUniqueSet.add(x[i]);
+  }
+
+  // Create output arrays
+  let xOut = new Array<f64>(xUniqueSet.size);
+  let yOut = new Array<f64>(xUniqueSet.size);
+  let wOut = new Array<f64>(xUniqueSet.size);
+
+  // Iterate through the x, y, z arrays and compute weighted average for the y's
+  // of duplicating x's
+  let curX = x[0];
+  let curY :f64 = 0;
+  let curW: f64 = 0;
+
+  const eps = 1e-6;
+  let i = 0;
+
+  for (let j = 0; j < x.length; j++) {
+    let xj = x[j];
+
+    if (Math.abs(xj - curX) >= eps) {
+      // xj is different from curX, we take average of the accumulated y's
+      xOut[i] = curX;
+      yOut[i] = curY / curW;
+      wOut[i] = curW;
+      i ++;
+
+      // Move to the new unique value, init y and w
+      curX = xj;
+      curY = y[j] * w[j];
+      curW = w[j];
+    } else {
+      // xj is the same as curX, we accumulate the weighted y value
+      curY += y[j] * w[j];
+      curW += w[j];
+    }
+  }
+
+  // Add the last values
+  xOut[i] = curX;
+  yOut[i] = curY / curW;
+  wOut[i] = curW;
+
+  assert(xUniqueSet.size == i + 1);
+  
+  return [xOut, yOut, wOut];
+};
 
 export function createArray(length: i32): Int32Array {
   return new Int32Array(length);

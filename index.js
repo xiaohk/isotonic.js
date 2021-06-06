@@ -51,12 +51,44 @@ const __lexsort = (x, y, w, increasing) => {
   let yArray = __getArray(yPtr);
   let wArray = __getArray(wPtr);
 
+  // Unpin the pointers so they can get collected
+  __unpin(xPtr);
+  __unpin(yPtr);
+  __unpin(wPtr);
+
   // console.log('x', xArray, 'y', yArray, 'w', wArray);
   return [xArray, yArray, wArray];
 };
 
-// console.log(wasmModule.exports);
+/**
+ * JS wrapper for the makeUnique() from WASM, which drops the duplicate x,
+ * replace their y's with weighted average, and replace their w's with weight
+ * sum. This function assumes that x is sorted. This function is only used to
+ * expose lexsort() for unit testing.
+ * @param x x array
+ * @param y y array
+ * @param w weight array
+ * @returns [unique x array, unique y array, unique weight array]
+ */
+const __makeUnique = (x, y, w) => {
+  // Create a new array in JS
+  let xPtr = __pin(__newArray(wasm.xArrayID, x));
+  let yPtr = __pin(__newArray(wasm.yArrayID, y));
+  let wPtr = __pin(__newArray(wasm.wArrayID, w));
+
+  let resultPtr = wasm.makeUnique(xPtr, yPtr, wPtr);
+
+  // Resolve the 2D pointers
+  let result = __getArray(resultPtr);
+  result = result.map((d) => __getArray(d));
+
+  return result;
+};
+
+
 module.exports = wasmModule.exports;
 
+// Add new functions
 module.exports.myCreateArray = myCreateArray;
 module.exports.__lexsort = __lexsort;
+module.exports.__makeUnique = __makeUnique;
