@@ -4,13 +4,13 @@
 console.log('Start testing...');
 
 // --- Testing lexsort() ---
-require('./test.lexsort');
+require('./lexsort.test');
 
 // --- Testing makeUnique() ---
-require('./test.makeUnique');
+require('./makeUnique.test');
 
 // --- Testing inplaceIsotonicY() ---
-require('./test.inplaceIsotonicY');
+require('./inplaceIsotonicY.test');
 
 console.log('\nPassed all the tests!');
 
