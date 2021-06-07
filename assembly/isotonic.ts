@@ -272,8 +272,8 @@ export class __IsotonicRegression {
    * @param clipOutOfBound if true, clip the out of bound x; otherwise predict null
    */
   constructor(yMin: f64, yMax: f64, increasing: bool, clipOutOfBound: bool) {
-    this.yMin = -Infinity;
-    this.yMax = Infinity;
+    this.yMin = yMin;
+    this.yMax = yMax;
     this.increasing = increasing;
     this.clipOutOfBound = clipOutOfBound;
 
@@ -356,9 +356,9 @@ export class __IsotonicRegression {
     this.yThresholds = cleanedUniqueY;
   };
 
-  predict(newX: Array<f64>): Array<f64> {
+  predict(newX: Array<f64>): Float64Array {
 
-    let predictions = new Array<f64>(newX.length);
+    let predictions = new Float64Array(newX.length);
 
     for (let i = 0; i < newX.length; i++) {
       // Find the corresponding ranges in xThresholds that newX should fall into

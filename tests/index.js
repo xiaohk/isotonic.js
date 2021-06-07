@@ -31,5 +31,9 @@ require('./predict.test');
 // Force garbage collecting
 myModule.__collect();
 
-console.log('\nPassed all the tests!');
+// --- Testing on the Iris dataset ---
+const iris = require('./iris.test');
+iris.testIris()
+  .then(() => { console.log('\nPassed all the tests!'); })
+
 

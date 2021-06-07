@@ -14,7 +14,6 @@ const __pin = wasm.__pin;
 const __unpin = wasm.__unpin;
 const __newArray = wasm.__newArray;
 const __getArray = wasm.__getArray;
-const __getArrayView = wasm.__getArrayView;
 
 /**
  * JS wrapper for the lexsort() from WASM, which sorts x, y, w with the same order
@@ -132,6 +131,11 @@ class IsotonicRegression {
    */
   constructor({yMin = -Infinity, yMax = Infinity, increasing = true, clipOutOfBound = true} = {}) {
     this.iso = new wasm.__IsotonicRegression(yMin, yMax, increasing, clipOutOfBound);
+
+    // Important to pin any WASM object created in JS
+    // Since the runtime on the Wasm end does not know that a JS object keeps
+    // the Wasm object alive
+    __pin(this.iso);
   }
 
   fit(x, y, w = undefined) {
@@ -166,6 +170,15 @@ class IsotonicRegression {
 
     __unpin(newXPtr);
     return predictedXArray;
+  }
+
+  /**
+   * Run this function when the model is no longer needed. It is necessary because
+   * WASM won't garbage collect the model until we manually __unpin() it from JS
+   * (memory leak)
+   */
+  destroy() {
+    __unpin(this.iso);
   }
 
   get xThresholds() {

@@ -18,6 +18,7 @@
   "devDependencies": {
     "@shopify/eslint-plugin": "^40.2.3",
     "assemblyscript": "^0.19.1",
-    "eslint": "^7.28.0"
+    "eslint": "^7.28.0",
+    "node-fetch": "^2.6.1"
   }
 }
