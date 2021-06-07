@@ -104,8 +104,22 @@ const __inplaceIsotonicY = (y, w) => {
   return yArray;
 };
 
-class IsotonicRegression {
+/**
+ * JS wrapper for the searchsorted() from WASM, which finds the index where
+ * inserting `value` into `sorted` would keep `sorted` in order.
+ * @param {[number]} sorted a sorted array (ascending order)
+ * @param {number} value a number to insert into `sorted`
+ * @returns index to insert `value` ito `sorted`
+ */
+const __searchsorted = (sorted, value) => {
+  let xPtr = __pin(__newArray(wasm.xArrayID, sorted));
+  let index = wasm.searchsorted(xPtr, value);
+  __unpin(xPtr);
+  return index;
+};
 
+class IsotonicRegression {
+  // Store an instance of WASM IsotonicRegression
   iso;
 
   /**
@@ -144,8 +158,9 @@ class IsotonicRegression {
     __unpin(wPtr);
   }
 
-  predict(x) {
-    let xPtr = __pin(__newArray(wasm.xArrayID, x));
+  predict(newX) {
+    // Pass newX to WASM to predict
+    let xPtr = __pin(__newArray(wasm.xArrayID, newX));
     let predictedXPtr = this.iso.predict(xPtr);
     let predictedXArray = __getArray(predictedXPtr);
 
@@ -186,6 +201,7 @@ module.exports = wasmModule.exports;
 module.exports.__lexsort = __lexsort;
 module.exports.__makeUnique = __makeUnique;
 module.exports.__inplaceIsotonicY = __inplaceIsotonicY;
+module.exports.__searchsorted = __searchsorted;
 
 // Overwrite the WASM IsotonicRegression with JS IsotonicRegression wrapper
 module.exports.IsotonicRegression = IsotonicRegression;

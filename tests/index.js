@@ -13,11 +13,19 @@ require('./makeUnique.test');
 // --- Testing inplaceIsotonicY() ---
 require('./inplaceIsotonicY.test');
 
+// --- Testing searchsorted() ---
+require('./searchsorted.test');
+
 // Force garbage collecting
 myModule.__collect();
 
 // --- Testing fit() ---
 require('./fit.test');
+
+// Force garbage collecting
+myModule.__collect();
+
+require('./predict.test');
 
 console.log('\nPassed all the tests!');
 

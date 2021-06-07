@@ -194,6 +194,4 @@ unitTestAssert(
   (e, r) => assert2dCloseTo(e, r, 1e-6)
 );
 
-console.log('\n');
-
 

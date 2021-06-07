@@ -204,6 +204,29 @@ export function inplaceIsotonicY(y: Array<f64>, w: Array<f64>): void {
 
 };
 
+/**
+ * Find the index where inserting `value` into `sorted` would keep `sorted` in order.
+ * @param sorted a sorted array (ascending order)
+ * @param value a number to insert into `sorted`
+ * @returns index to insert `value` ito `sorted`
+ */
+export function searchsorted(sorted: Array<f64>, value: f64): i32 {
+  let left: i32 = 0;
+  let right: i32 = sorted.length - 1;
+
+  while (right - left > 1) {
+    let i: i32 = left + Math.floor((right - left) / 2) as i32;
+    if (value > sorted[i]) {
+      left = i;
+    } else if (value < sorted[i]) {
+      right = i;
+    } else {
+      return i;
+    }
+  }
+  return right;
+}
+
 export class __IsotonicRegression {
   yMin: f64;
   yMax: f64;
@@ -312,7 +335,11 @@ export class __IsotonicRegression {
 
   }
 
-  predict(x: Array<f64>): Array<f64> {
+  predict(newX: Array<f64>): Array<f64> {
+
+    // Find the corresponding ranges in xThresholds that newX should fall into
+
+
     return this.yThresholds;
   }
 }

@@ -9,8 +9,8 @@
  (type $i32_i32_i32_i32_=>_none (func (param i32 i32 i32 i32)))
  (type $i32_i32_i32_=>_i32 (func (param i32 i32 i32) (result i32)))
  (type $none_=>_none (func))
- (type $i32_i32_f64_=>_none (func (param i32 i32 f64)))
  (type $i32_f64_=>_i32 (func (param i32 f64) (result i32)))
+ (type $i32_i32_f64_=>_none (func (param i32 i32 f64)))
  (type $i32_f64_f64_i32_i32_=>_i32 (func (param i32 f64 f64 i32 i32) (result i32)))
  (type $none_=>_i32 (func (result i32)))
  (type $i32_i32_=>_f64 (func (param i32 i32) (result f64)))
@@ -79,6 +79,7 @@
  (export "lexsort" (func $export:assembly/isotonic/lexsort@varargs))
  (export "makeUnique" (func $export:assembly/isotonic/makeUnique))
  (export "inplaceIsotonicY" (func $export:assembly/isotonic/inplaceIsotonicY))
+ (export "searchsorted" (func $export:assembly/isotonic/searchsorted))
  (export "__IsotonicRegression#get:yMin" (func $export:assembly/isotonic/__IsotonicRegression#get:yMin))
  (export "__IsotonicRegression#set:yMin" (func $export:assembly/isotonic/__IsotonicRegression#set:yMin))
  (export "__IsotonicRegression#get:yMax" (func $export:assembly/isotonic/__IsotonicRegression#get:yMax))
@@ -4749,6 +4750,69 @@
   local.get $2
   call $~lib/array/Array<i32>#__uset
  )
+ (func $assembly/isotonic/searchsorted (param $0 i32) (param $1 f64) (result i32)
+  (local $2 i32)
+  (local $3 i32)
+  (local $4 i32)
+  (local $5 f64)
+  (local $6 i32)
+  i32.const 0
+  local.set $2
+  local.get $0
+  call $~lib/array/Array<f64>#get:length
+  i32.const 1
+  i32.sub
+  local.set $3
+  loop $while-continue|0
+   local.get $3
+   local.get $2
+   i32.sub
+   i32.const 1
+   i32.gt_s
+   local.set $4
+   local.get $4
+   if
+    local.get $2
+    f64.convert_i32_s
+    local.get $3
+    local.get $2
+    i32.sub
+    i32.const 2
+    i32.div_s
+    f64.convert_i32_s
+    local.set $5
+    local.get $5
+    f64.floor
+    f64.add
+    i32.trunc_f64_s
+    local.set $6
+    local.get $1
+    local.get $0
+    local.get $6
+    call $~lib/array/Array<f64>#__get
+    f64.gt
+    if
+     local.get $6
+     local.set $2
+    else
+     local.get $1
+     local.get $0
+     local.get $6
+     call $~lib/array/Array<f64>#__get
+     f64.lt
+     if
+      local.get $6
+      local.set $3
+     else
+      local.get $6
+      return
+     end
+    end
+    br $while-continue|0
+   end
+  end
+  local.get $3
+ )
  (func $assembly/isotonic/__IsotonicRegression#set:yMin (param $0 i32) (param $1 f64)
   local.get $0
   local.get $1
@@ -7127,6 +7191,26 @@
   i32.const 8
   i32.add
   global.set $~lib/memory/__stack_pointer
+ )
+ (func $export:assembly/isotonic/searchsorted (param $0 i32) (param $1 f64) (result i32)
+  (local $2 i32)
+  global.get $~lib/memory/__stack_pointer
+  i32.const 4
+  i32.sub
+  global.set $~lib/memory/__stack_pointer
+  call $~stack_check
+  global.get $~lib/memory/__stack_pointer
+  local.get $0
+  i32.store
+  local.get $0
+  local.get $1
+  call $assembly/isotonic/searchsorted
+  local.set $2
+  global.get $~lib/memory/__stack_pointer
+  i32.const 4
+  i32.add
+  global.set $~lib/memory/__stack_pointer
+  local.get $2
  )
  (func $export:assembly/isotonic/__IsotonicRegression#get:yMin (param $0 i32) (result f64)
   (local $1 f64)
