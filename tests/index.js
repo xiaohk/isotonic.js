@@ -25,7 +25,11 @@ require('./fit.test');
 // Force garbage collecting
 myModule.__collect();
 
+// --- Testing predict() ---
 require('./predict.test');
+
+// Force garbage collecting
+myModule.__collect();
 
 console.log('\nPassed all the tests!');
 

@@ -40,3 +40,23 @@ unitTestEqual(
   expected
 );
 
+sorted = [2, 6, 8, 9, 10, 20];
+value = 25;
+expected = 6;
+
+unitTestEqual(
+  'searchsorted [out of bound at right]',
+  () => myModule.__searchsorted(sorted, value),
+  expected
+);
+
+sorted = [2, 6, 8, 9, 10, 20];
+value = -25;
+expected = 0;
+
+unitTestEqual(
+  'searchsorted [out of bound at left]',
+  () => myModule.__searchsorted(sorted, value),
+  expected
+);
+

@@ -21,6 +21,7 @@
  (global $assembly/isotonic/xArrayID i32 (i32.const 3))
  (global $assembly/isotonic/yArrayID i32 (i32.const 3))
  (global $assembly/isotonic/wArrayID i32 (i32.const 3))
+ (global $assembly/isotonic/newXArrayID i32 (i32.const 3))
  (global $~lib/rt/itcms/total (mut i32) (i32.const 0))
  (global $~lib/rt/itcms/threshold (mut i32) (i32.const 0))
  (global $~lib/rt/itcms/state (mut i32) (i32.const 0))
@@ -69,6 +70,7 @@
  (export "xArrayID" (global $assembly/isotonic/xArrayID))
  (export "yArrayID" (global $assembly/isotonic/yArrayID))
  (export "wArrayID" (global $assembly/isotonic/wArrayID))
+ (export "newXArrayID" (global $assembly/isotonic/newXArrayID))
  (export "__new" (func $~lib/rt/itcms/__new))
  (export "__pin" (func $~lib/rt/itcms/__pin))
  (export "__unpin" (func $~lib/rt/itcms/__unpin))
@@ -4811,6 +4813,26 @@
     br $while-continue|0
    end
   end
+  local.get $1
+  local.get $0
+  local.get $3
+  call $~lib/array/Array<f64>#__get
+  f64.gt
+  if
+   local.get $3
+   i32.const 1
+   i32.add
+   return
+  end
+  local.get $1
+  local.get $0
+  local.get $2
+  call $~lib/array/Array<f64>#__get
+  f64.lt
+  if
+   local.get $2
+   return
+  end
   local.get $3
  )
  (func $assembly/isotonic/__IsotonicRegression#set:yMin (param $0 i32) (param $1 f64)
@@ -5285,10 +5307,6 @@
   i32.const 24
   i32.add
   global.set $~lib/memory/__stack_pointer
- )
- (func $assembly/isotonic/__IsotonicRegression#predict (param $0 i32) (param $1 i32) (result i32)
-  local.get $0
-  i32.load offset=40
  )
  (func $assembly/isotonic/lexsort@varargs (param $0 i32) (param $1 i32) (param $2 i32) (param $3 i32)
   block $1of1
@@ -6133,6 +6151,210 @@
   i32.const 12
   i32.add
   global.set $~lib/memory/__stack_pointer
+ )
+ (func $assembly/isotonic/__IsotonicRegression#predict (param $0 i32) (param $1 i32) (result i32)
+  (local $2 i32)
+  (local $3 i32)
+  (local $4 i32)
+  (local $5 i32)
+  (local $6 f64)
+  (local $7 f64)
+  (local $8 f64)
+  (local $9 f64)
+  (local $10 f64)
+  (local $11 i32)
+  global.get $~lib/memory/__stack_pointer
+  i32.const 12
+  i32.sub
+  global.set $~lib/memory/__stack_pointer
+  call $~stack_check
+  global.get $~lib/memory/__stack_pointer
+  i64.const 0
+  i64.store
+  global.get $~lib/memory/__stack_pointer
+  i32.const 0
+  i32.store offset=8
+  global.get $~lib/memory/__stack_pointer
+  i32.const 0
+  local.get $1
+  call $~lib/array/Array<f64>#get:length
+  call $~lib/array/Array<f64>#constructor
+  local.tee $2
+  i32.store
+  i32.const 0
+  local.set $3
+  loop $for-loop|0
+   local.get $3
+   local.get $1
+   call $~lib/array/Array<f64>#get:length
+   i32.lt_s
+   local.set $4
+   local.get $4
+   if
+    block $for-continue|0
+     local.get $0
+     i32.load offset=36
+     local.set $11
+     global.get $~lib/memory/__stack_pointer
+     local.get $11
+     i32.store offset=4
+     local.get $11
+     local.get $1
+     local.get $3
+     call $~lib/array/Array<f64>#__get
+     call $assembly/isotonic/searchsorted
+     local.set $5
+     local.get $5
+     i32.const 1
+     i32.lt_s
+     if
+      local.get $0
+      i32.load8_u offset=33
+      if
+       local.get $2
+       local.get $3
+       local.get $0
+       i32.load offset=40
+       local.set $11
+       global.get $~lib/memory/__stack_pointer
+       local.get $11
+       i32.store offset=4
+       local.get $11
+       i32.const 0
+       call $~lib/array/Array<f64>#__get
+       call $~lib/array/Array<f64>#__set
+      else
+       local.get $2
+       local.get $3
+       f64.const nan:0x8000000000000
+       call $~lib/array/Array<f64>#__set
+      end
+      br $for-continue|0
+     end
+     local.get $5
+     local.get $0
+     i32.load offset=36
+     local.set $11
+     global.get $~lib/memory/__stack_pointer
+     local.get $11
+     i32.store offset=4
+     local.get $11
+     call $~lib/array/Array<f64>#get:length
+     i32.const 1
+     i32.sub
+     i32.gt_s
+     if
+      local.get $0
+      i32.load8_u offset=33
+      if
+       local.get $2
+       local.get $3
+       local.get $0
+       i32.load offset=40
+       local.set $11
+       global.get $~lib/memory/__stack_pointer
+       local.get $11
+       i32.store offset=4
+       local.get $11
+       local.get $0
+       i32.load offset=40
+       local.set $11
+       global.get $~lib/memory/__stack_pointer
+       local.get $11
+       i32.store offset=8
+       local.get $11
+       call $~lib/array/Array<f64>#get:length
+       i32.const 1
+       i32.sub
+       call $~lib/array/Array<f64>#__get
+       call $~lib/array/Array<f64>#__set
+      else
+       local.get $2
+       local.get $3
+       f64.const nan:0x8000000000000
+       call $~lib/array/Array<f64>#__set
+      end
+      br $for-continue|0
+     end
+     local.get $0
+     i32.load offset=36
+     local.set $11
+     global.get $~lib/memory/__stack_pointer
+     local.get $11
+     i32.store offset=4
+     local.get $11
+     local.get $5
+     i32.const 1
+     i32.sub
+     call $~lib/array/Array<f64>#__get
+     local.set $6
+     local.get $0
+     i32.load offset=36
+     local.set $11
+     global.get $~lib/memory/__stack_pointer
+     local.get $11
+     i32.store offset=4
+     local.get $11
+     local.get $5
+     call $~lib/array/Array<f64>#__get
+     local.set $7
+     local.get $0
+     i32.load offset=40
+     local.set $11
+     global.get $~lib/memory/__stack_pointer
+     local.get $11
+     i32.store offset=4
+     local.get $11
+     local.get $5
+     i32.const 1
+     i32.sub
+     call $~lib/array/Array<f64>#__get
+     local.set $8
+     local.get $0
+     i32.load offset=40
+     local.set $11
+     global.get $~lib/memory/__stack_pointer
+     local.get $11
+     i32.store offset=4
+     local.get $11
+     local.get $5
+     call $~lib/array/Array<f64>#__get
+     local.set $9
+     local.get $9
+     local.get $8
+     f64.sub
+     local.get $7
+     local.get $6
+     f64.sub
+     f64.div
+     local.set $10
+     local.get $2
+     local.get $3
+     local.get $8
+     local.get $10
+     local.get $1
+     local.get $3
+     call $~lib/array/Array<f64>#__get
+     local.get $6
+     f64.sub
+     f64.mul
+     f64.add
+     call $~lib/array/Array<f64>#__set
+    end
+    local.get $3
+    i32.const 1
+    i32.add
+    local.set $3
+    br $for-loop|0
+   end
+  end
+  local.get $2
+  local.set $11
+  global.get $~lib/memory/__stack_pointer
+  i32.const 12
+  i32.add
+  global.set $~lib/memory/__stack_pointer
+  local.get $11
  )
  (func $~lib/array/Array<~lib/array/Array<f64>>#constructor (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
@@ -7070,10 +7292,11 @@
   i32.const 0
   call $assembly/isotonic/__IsotonicRegression#set:buildF
   local.get $0
-  local.get $1
+  f64.const inf
+  f64.neg
   call $assembly/isotonic/__IsotonicRegression#set:yMin
   local.get $0
-  local.get $2
+  f64.const inf
   call $assembly/isotonic/__IsotonicRegression#set:yMax
   local.get $0
   local.get $3

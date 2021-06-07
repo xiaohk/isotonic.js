@@ -40,6 +40,9 @@ const assert2dCloseTo = (expected, result, delta) => {
   assert(expected.length === result.length && expected[0].length === result[0].length);
   for (let i = 0; i < expected.length; i++) {
     for (let j = 0; j < expected.length; j++) {
+      if (isNaN(expected[i][j]) && isNaN(expected[i][j])) {
+        continue;
+      }
       assert(Math.abs(expected[i][j] - result[i][j]) <= delta);
     }
   }
@@ -48,6 +51,9 @@ const assert2dCloseTo = (expected, result, delta) => {
 const assert1dCloseTo = (expected, result, delta) => {
   assert(expected.length === result.length);
   for (let i = 0; i < expected.length; i++) {
+    if (isNaN(expected[i]) && isNaN(expected[i])) {
+      continue;
+    }
     assert(Math.abs(expected[i] - result[i]) <= delta);
   }
 };

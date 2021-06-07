@@ -116,7 +116,21 @@ export function makeUnique(x: Array<f64>, y: Array<f64>, w: Array<f64>): Array<A
   wOut[i] = curW;
 
   assert(xUniqueSet.size == i + 1);
-  
+
+  // let output = new Array<Array<f64>>(3);
+  // for (let i = 0; i < 3; i++) {
+  //   output[i] = new Array<f64>(xOut.length);
+  //   for (let j = 0; j < xOut.length; j++) {
+  //     if (i == 0) {
+  //       output[i][j] = xOut[j];
+  //     } else if (i == 1) {
+  //       output[i][j] = yOut[j];
+  //     } else if (i == 2) {
+  //       output[i][j] = wOut[j];
+  //     }
+  //   }
+  // }
+
   return [xOut, yOut, wOut];
 };
 
@@ -224,6 +238,14 @@ export function searchsorted(sorted: Array<f64>, value: f64): i32 {
       return i;
     }
   }
+
+  // Handle out of bound issue
+  if (value > sorted[right]) {
+    return right + 1;
+  }
+  if (value < sorted[left]) {
+    return left;
+  }
   return right;
 }
 
@@ -250,8 +272,8 @@ export class __IsotonicRegression {
    * @param clipOutOfBound if true, clip the out of bound x; otherwise predict null
    */
   constructor(yMin: f64, yMax: f64, increasing: bool, clipOutOfBound: bool) {
-    this.yMin = yMin;
-    this.yMax = yMax;
+    this.yMin = -Infinity;
+    this.yMax = Infinity;
     this.increasing = increasing;
     this.clipOutOfBound = clipOutOfBound;
 
@@ -262,7 +284,7 @@ export class __IsotonicRegression {
     this.buildF = (x: Array<f64>) => x;
     this.xMin = Infinity;
     this.xMax = -Infinity;
-  }
+  };
 
   fit(x: Array<f64>, y: Array<f64>, w: Array<f64>): void {
     // Sort the x, y, w arrays by x and y
@@ -332,21 +354,54 @@ export class __IsotonicRegression {
     // Store the fitted values
     this.xThresholds = cleanedUniqueX;
     this.yThresholds = cleanedUniqueY;
-
-  }
+  };
 
   predict(newX: Array<f64>): Array<f64> {
 
-    // Find the corresponding ranges in xThresholds that newX should fall into
+    let predictions = new Array<f64>(newX.length);
 
+    for (let i = 0; i < newX.length; i++) {
+      // Find the corresponding ranges in xThresholds that newX should fall into
+      let curIndex = searchsorted(this.xThresholds, newX[i]);
 
-    return this.yThresholds;
-  }
+      // Clip the insert index if `clipOutOfBound`
+      if (curIndex < 1) {
+        if (this.clipOutOfBound) {
+          // Use the min y threshold for out of bound x
+          predictions[i] = this.yThresholds[0];
+        } else {
+          predictions[i] = NaN;
+        }
+        continue;
+      }
+
+      if (curIndex > this.xThresholds.length - 1) {
+        if (this.clipOutOfBound) {
+          // Use the max y threshold for out of bound x
+          predictions[i] = this.yThresholds[this.yThresholds.length - 1];
+        } else {
+          predictions[i] = NaN;
+        }
+        continue;
+      }
+
+      // Calculate the prediction using linear interpolation between thresholds
+      let xLow = this.xThresholds[curIndex - 1];
+      let xHigh = this.xThresholds[curIndex];
+      let yLow = this.yThresholds[curIndex - 1];
+      let yHigh = this.yThresholds[curIndex];
+
+      let slope = (yHigh - yLow) / (xHigh - xLow);
+
+      predictions[i] = yLow + slope * (newX[i] - xLow);
+    }
+
+    return predictions;
+  };
 }
 
 // We need unique array id so we can allocate them in JS
 export const xArrayID = idof<Array<f64>>();
 export const yArrayID = idof<Array<f64>>();
 export const wArrayID = idof<Array<f64>>();
-
-
+export const newXArrayID = idof<Array<f64>>();

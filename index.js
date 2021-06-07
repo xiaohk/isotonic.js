@@ -160,11 +160,11 @@ class IsotonicRegression {
 
   predict(newX) {
     // Pass newX to WASM to predict
-    let xPtr = __pin(__newArray(wasm.xArrayID, newX));
-    let predictedXPtr = this.iso.predict(xPtr);
+    let newXPtr = __pin(__newArray(wasm.newXArrayID, newX));
+    let predictedXPtr = this.iso.predict(newXPtr);
     let predictedXArray = __getArray(predictedXPtr);
 
-    __unpin(xPtr);
+    __unpin(newXPtr);
     return predictedXArray;
   }
 
