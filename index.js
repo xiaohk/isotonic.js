@@ -120,10 +120,10 @@ class IsotonicRegression {
     this.iso = new wasm.__IsotonicRegression(yMin, yMax, increasing, clipOutOfBound);
   }
 
-  fit(x, y, w = null) {
+  fit(x, y, w = undefined) {
     // If sample weight is not given, replace them with [1, 1 ... 1]
     let sampleWeight = w;
-    if (w === null) {
+    if (w === undefined) {
       sampleWeight = new Array(x.length).fill(1.0);
     }
 
