@@ -1,4 +1,5 @@
 // The entry file of all unite tests.
+const myModule = require('..');
 
 // --- Testing ---
 console.log('Start testing...');
@@ -11,6 +12,9 @@ require('./makeUnique.test');
 
 // --- Testing inplaceIsotonicY() ---
 require('./inplaceIsotonicY.test');
+
+// Force garbage collecting
+myModule.__collect();
 
 // --- Testing fit() ---
 require('./fit.test');

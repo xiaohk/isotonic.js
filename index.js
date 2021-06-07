@@ -65,7 +65,7 @@ const __makeUnique = (x, y, w) => {
   let yPtr = __pin(__newArray(wasm.yArrayID, y));
   let wPtr = __pin(__newArray(wasm.wArrayID, w));
 
-  let resultPtr = wasm.makeUnique(xPtr, yPtr, wPtr);
+  let resultPtr = __pin(wasm.makeUnique(xPtr, yPtr, wPtr));
 
   // Resolve the 2D pointers
   let result = __getArray(resultPtr);
@@ -75,6 +75,7 @@ const __makeUnique = (x, y, w) => {
   __unpin(xPtr);
   __unpin(yPtr);
   __unpin(wPtr);
+  __unpin(resultPtr);
 
   return result;
 };
@@ -109,12 +110,13 @@ class IsotonicRegression {
 
   /**
    * Constructor for the class IsotonicRegression
-   * @param {number} yMin minimum value of y
-   * @param {number} yMax maximum value of y
-   * @param {bool} increasing if true, fit an increasing isotonic regression
-   * @param {bool} clipOutOfBound if true, clip the out of bound x; otherwise predict null
+   * @param {object} param0 Model configuration. It can have 4 fields:
+   * 1. yMin {number} minimum value of y, default = -Infinity
+   * 2. yMax {number} maximum value of y, default = Infinity
+   * 3. increasing {bool} if true, fit an increasing isotonic regression, default = true
+   * 4. clipOutOfBound {bool} if true, clip the out of bound x; otherwise predict null, default = true
    */
-  constructor(yMin = -Infinity, yMax = Infinity, increasing = true, clipOutOfBound = true) {
+  constructor({yMin = -Infinity, yMax = Infinity, increasing = true, clipOutOfBound = true} = {}) {
     this.iso = new wasm.__IsotonicRegression(yMin, yMax, increasing, clipOutOfBound);
   }
 
@@ -136,12 +138,18 @@ class IsotonicRegression {
     // Fit the Isotonic regression using WASM
     this.iso.fit(xPtr, yPtr, wPtr);
 
+    // Unpin the pointers so they can get collected
+    __unpin(xPtr);
+    __unpin(yPtr);
+    __unpin(wPtr);
   }
 
   predict(x) {
     let xPtr = __pin(__newArray(wasm.xArrayID, x));
     let predictedXPtr = this.iso.predict(xPtr);
     let predictedXArray = __getArray(predictedXPtr);
+
+    __unpin(xPtr);
     return predictedXArray;
   }
 
@@ -151,6 +159,14 @@ class IsotonicRegression {
 
   get yThresholds() {
     return __getArray(this.iso.yThresholds);
+  }
+
+  get xMin() {
+    return this.iso.xMin;
+  }
+
+  get xMax() {
+    return this.iso.xMax;
   }
 
   __checkFitParam(x, y, w) {

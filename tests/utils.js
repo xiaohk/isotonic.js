@@ -37,6 +37,7 @@ const unitTestAssert = (name, func, target, customAssert) => {
 
 // Since we are computing floats, we can implement a 2D closeTo assertion method
 const assert2dCloseTo = (expected, result, delta) => {
+  assert(expected.length === result.length && expected[0].length === result[0].length);
   for (let i = 0; i < expected.length; i++) {
     for (let j = 0; j < expected.length; j++) {
       assert(Math.abs(expected[i][j] - result[i][j]) <= delta);
@@ -45,6 +46,7 @@ const assert2dCloseTo = (expected, result, delta) => {
 };
 
 const assert1dCloseTo = (expected, result, delta) => {
+  assert(expected.length === result.length);
   for (let i = 0; i < expected.length; i++) {
     assert(Math.abs(expected[i] - result[i]) <= delta);
   }

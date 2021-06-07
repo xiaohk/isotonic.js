@@ -4966,12 +4966,6 @@
   global.get $~lib/memory/__stack_pointer
   i64.const 0
   i64.store offset=16
-  local.get $0
-  local.get $1
-  call $assembly/isotonic/__IsotonicRegression#set:xThresholds
-  local.get $0
-  local.get $2
-  call $assembly/isotonic/__IsotonicRegression#set:yThresholds
   local.get $1
   local.get $2
   local.get $3

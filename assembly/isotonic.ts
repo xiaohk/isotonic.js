@@ -242,9 +242,6 @@ export class __IsotonicRegression {
   }
 
   fit(x: Array<f64>, y: Array<f64>, w: Array<f64>): void {
-    this.xThresholds = x;
-    this.yThresholds = y;
-
     // Sort the x, y, w arrays by x and y
     lexsort(x, y, w);
 
@@ -318,7 +315,6 @@ export class __IsotonicRegression {
   predict(x: Array<f64>): Array<f64> {
     return this.yThresholds;
   }
-
 }
 
 // We need unique array id so we can allocate them in JS
