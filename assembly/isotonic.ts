@@ -204,6 +204,123 @@ export function inplaceIsotonicY(y: Array<f64>, w: Array<f64>): void {
 
 };
 
+export class __IsotonicRegression {
+  yMin: f64;
+  yMax: f64;
+  xMin: f64;
+  xMax: f64;
+
+  increasing: bool;
+  clipOutOfBound: bool;
+
+  xThresholds: Array<f64>;
+  yThresholds: Array<f64>;
+
+  buildY: Array<f64>;
+  buildF: (x: Array<f64>) => Array<f64>;
+
+  /**
+   * Constructor for the class IsotonicRegression
+   * @param yMin minimum value of y
+   * @param yMax maximum value of y
+   * @param increasing if true, fit an increasing isotonic regression
+   * @param clipOutOfBound if true, clip the out of bound x; otherwise predict null
+   */
+  constructor(yMin: f64, yMax: f64, increasing: bool, clipOutOfBound: bool) {
+    this.yMin = yMin;
+    this.yMax = yMax;
+    this.increasing = increasing;
+    this.clipOutOfBound = clipOutOfBound;
+
+    // Have to initialize all properties
+    this.xThresholds = [];
+    this.yThresholds = [];
+    this.buildY = [];
+    this.buildF = (x: Array<f64>) => x;
+    this.xMin = Infinity;
+    this.xMax = -Infinity;
+  }
+
+  fit(x: Array<f64>, y: Array<f64>, w: Array<f64>): void {
+    this.xThresholds = x;
+    this.yThresholds = y;
+
+    // Sort the x, y, w arrays by x and y
+    lexsort(x, y, w);
+
+    // Deduplicate x by computing weighted average of y's
+    let result = makeUnique(x, y, w);
+    let uniqueX = result[0];
+    let uniqueY = result[1];
+    let uniqueW = result[2];
+
+    // Reverse y and w if we are fitting a decreasing isotonic regression
+    if (!this.increasing) {
+      uniqueY.reverse();
+      uniqueW.reverse();
+    }
+
+    // Fit isotonic regression on y and w
+    inplaceIsotonicY(uniqueY, uniqueW);
+
+    // Clip the fitted y by [yMin, yMax]
+    for (let i = 0; i < uniqueY.length; i++) {
+      if (uniqueY[i] < this.yMin) {
+        uniqueY[i] = this.yMin;
+      }
+      if (uniqueY[i] > this.yMax) {
+        uniqueY[i] = this.yMax;
+      }
+    }
+
+    // If user is fitting a decreasing isotonic regression, we need to flip back
+    // the y and w arrays
+    if (!this.increasing) {
+      uniqueY.reverse();
+    }
+
+    // Store the bounds of x arrays
+    for (let i = 0; i < uniqueX.length; i++) {
+      if (uniqueX[i] > this.xMax) {
+        this.xMax = uniqueX[i];
+      }
+      if (uniqueX[i] < this.xMin) {
+        this.xMin = uniqueX[i];
+      }
+    }
+
+    // Remove unnecessary points after fitting (y values that are equal to the
+    // one before and the one after it, except the 1st and last y)
+    let cleanedUniqueX = new Array<f64>();
+    let cleanedUniqueY = new Array<f64>();
+
+    cleanedUniqueX.push(uniqueX[0]);
+    cleanedUniqueY.push(uniqueY[0]);
+
+    const esp = 1e-6;
+    
+    for (let i = 1; i < uniqueY.length - 1; i++) {
+      if (Math.abs(uniqueY[i] - uniqueY[i - 1]) > esp || Math.abs(uniqueY[i] - uniqueY[i + 1]) > esp) {
+        cleanedUniqueX.push(uniqueX[i]);
+        cleanedUniqueY.push(uniqueY[i]);
+      }
+    }
+
+    cleanedUniqueX.push(uniqueX[uniqueX.length - 1]);
+    cleanedUniqueY.push(uniqueY[uniqueY.length - 1]);
+
+    // Store the fitted values
+    this.xThresholds = cleanedUniqueX;
+    this.yThresholds = cleanedUniqueY;
+
+  }
+
+  predict(x: Array<f64>): Array<f64> {
+    return this.yThresholds;
+  }
+
+}
+
 // We need unique array id so we can allocate them in JS
 export const xArrayID = idof<Array<f64>>();
 export const yArrayID = idof<Array<f64>>();

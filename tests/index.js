@@ -12,5 +12,8 @@ require('./makeUnique.test');
 // --- Testing inplaceIsotonicY() ---
 require('./inplaceIsotonicY.test');
 
+// --- Testing fit() ---
+require('./fit.test');
+
 console.log('\nPassed all the tests!');
 

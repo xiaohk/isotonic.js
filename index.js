@@ -103,10 +103,74 @@ const __inplaceIsotonicY = (y, w) => {
   return yArray;
 };
 
+class IsotonicRegression {
+
+  iso;
+
+  /**
+   * Constructor for the class IsotonicRegression
+   * @param {number} yMin minimum value of y
+   * @param {number} yMax maximum value of y
+   * @param {bool} increasing if true, fit an increasing isotonic regression
+   * @param {bool} clipOutOfBound if true, clip the out of bound x; otherwise predict null
+   */
+  constructor(yMin = -Infinity, yMax = Infinity, increasing = true, clipOutOfBound = true) {
+    this.iso = new wasm.__IsotonicRegression(yMin, yMax, increasing, clipOutOfBound);
+  }
+
+  fit(x, y, w = null) {
+    // If sample weight is not given, replace them with [1, 1 ... 1]
+    let sampleWeight = w;
+    if (w === null) {
+      sampleWeight = new Array(x.length).fill(1.0);
+    }
+
+    // Check the parameters
+    this.__checkFitParam(x, y, sampleWeight);
+
+    // Create arrays in WASM memory
+    let xPtr = __pin(__newArray(wasm.xArrayID, x));
+    let yPtr = __pin(__newArray(wasm.yArrayID, y));
+    let wPtr = __pin(__newArray(wasm.wArrayID, sampleWeight));
+
+    // Fit the Isotonic regression using WASM
+    this.iso.fit(xPtr, yPtr, wPtr);
+
+  }
+
+  predict(x) {
+    let xPtr = __pin(__newArray(wasm.xArrayID, x));
+    let predictedXPtr = this.iso.predict(xPtr);
+    let predictedXArray = __getArray(predictedXPtr);
+    return predictedXArray;
+  }
+
+  get xThresholds() {
+    return __getArray(this.iso.xThresholds);
+  }
+
+  get yThresholds() {
+    return __getArray(this.iso.yThresholds);
+  }
+
+  __checkFitParam(x, y, w) {
+    if (x.length <= 1 || y.length <= 1 || w.length <= 1) {
+      throw new Error('The length of input arrays should be greater than 1.');
+    }
+
+    if (x.length !== y.length) {
+      throw new Error('The x array and y array should have the same length.');
+    }
+  }
+}
+
 module.exports = wasmModule.exports;
 
 // Add new functions
 module.exports.__lexsort = __lexsort;
 module.exports.__makeUnique = __makeUnique;
 module.exports.__inplaceIsotonicY = __inplaceIsotonicY;
+
+// Overwrite the WASM IsotonicRegression with JS IsotonicRegression wrapper
+module.exports.IsotonicRegression = IsotonicRegression;
 

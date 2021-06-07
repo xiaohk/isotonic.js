@@ -1,19 +1,21 @@
 (module
  (type $i32_i32_=>_none (func (param i32 i32)))
- (type $i32_i32_=>_i32 (func (param i32 i32) (result i32)))
  (type $i32_=>_i32 (func (param i32) (result i32)))
+ (type $i32_i32_=>_i32 (func (param i32 i32) (result i32)))
  (type $i32_i32_i32_=>_none (func (param i32 i32 i32)))
  (type $i32_=>_none (func (param i32)))
- (type $i32_i32_i32_=>_i32 (func (param i32 i32 i32) (result i32)))
+ (type $i32_f64_=>_none (func (param i32 f64)))
+ (type $i32_=>_f64 (func (param i32) (result f64)))
  (type $i32_i32_i32_i32_=>_none (func (param i32 i32 i32 i32)))
+ (type $i32_i32_i32_=>_i32 (func (param i32 i32 i32) (result i32)))
  (type $none_=>_none (func))
  (type $i32_i32_f64_=>_none (func (param i32 i32 f64)))
+ (type $i32_f64_=>_i32 (func (param i32 f64) (result i32)))
+ (type $i32_f64_f64_i32_i32_=>_i32 (func (param i32 f64 f64 i32 i32) (result i32)))
  (type $none_=>_i32 (func (result i32)))
  (type $i32_i32_=>_f64 (func (param i32 i32) (result f64)))
  (type $f64_=>_i32 (func (param f64) (result i32)))
  (type $i32_f64_i32_=>_i32 (func (param i32 f64 i32) (result i32)))
- (type $i32_f64_=>_none (func (param i32 f64)))
- (type $i32_f64_=>_i32 (func (param i32 f64) (result i32)))
  (type $i32_i32_i32_i32_=>_i32 (func (param i32 i32 i32 i32) (result i32)))
  (import "env" "abort" (func $~lib/builtins/abort (param i32 i32 i32 i32)))
  (global $assembly/isotonic/xArrayID i32 (i32.const 3))
@@ -32,10 +34,11 @@
  (global $~lib/ASC_LOW_MEMORY_LIMIT i32 (i32.const 0))
  (global $~lib/ASC_SHRINK_LEVEL i32 (i32.const 0))
  (global $~argumentsLength (mut i32) (i32.const 0))
- (global $~lib/rt/__rtti_base i32 (i32.const 992))
- (global $~lib/memory/__data_end i32 (i32.const 1068))
- (global $~lib/memory/__stack_pointer (mut i32) (i32.const 17452))
- (global $~lib/memory/__heap_base i32 (i32.const 17452))
+ (global $assembly/isotonic/__IsotonicRegression i32 (i32.const 9))
+ (global $~lib/rt/__rtti_base i32 (i32.const 1120))
+ (global $~lib/memory/__data_end i32 (i32.const 1212))
+ (global $~lib/memory/__stack_pointer (mut i32) (i32.const 17596))
+ (global $~lib/memory/__heap_base i32 (i32.const 17596))
  (memory $0 1)
  (data (i32.const 12) ",\00\00\00\00\00\00\00\00\00\00\00\01\00\00\00\1c\00\00\00I\00n\00v\00a\00l\00i\00d\00 \00l\00e\00n\00g\00t\00h\00")
  (data (i32.const 60) ",\00\00\00\00\00\00\00\00\00\00\00\01\00\00\00\1a\00\00\00~\00l\00i\00b\00/\00a\00r\00r\00a\00y\00.\00t\00s\00\00\00")
@@ -53,11 +56,16 @@
  (data (i32.const 700) "<\00\00\00\00\00\00\00\00\00\00\00\01\00\00\00&\00\00\00~\00l\00i\00b\00/\00a\00r\00r\00a\00y\00b\00u\00f\00f\00e\00r\00.\00t\00s\00\00\00\00\00\00\00")
  (data (i32.const 764) "<\00\00\00\00\00\00\00\00\00\00\00\01\00\00\00(\00\00\00a\00s\00s\00e\00m\00b\00l\00y\00/\00i\00s\00o\00t\00o\00n\00i\00c\00.\00t\00s\00\00\00\00\00")
  (data (i32.const 828) "\1c\00\00\00\00\00\00\00\00\00\00\00\08\00\00\00\08\00\00\00\03\00\00\00\00\00\00\00\00\00\00\00")
- (data (i32.const 860) "<\00\00\00\00\00\00\00\00\00\00\00\01\00\00\00*\00\00\00O\00b\00j\00e\00c\00t\00 \00a\00l\00r\00e\00a\00d\00y\00 \00p\00i\00n\00n\00e\00d\00\00\00")
- (data (i32.const 924) "<\00\00\00\00\00\00\00\00\00\00\00\01\00\00\00(\00\00\00O\00b\00j\00e\00c\00t\00 \00i\00s\00 \00n\00o\00t\00 \00p\00i\00n\00n\00e\00d\00\00\00\00\00")
- (data (i32.const 992) "\t\00\00\00 \00\00\00\00\00\00\00 \00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\02\1a\00\00\00\00\00\00\02A\00\00\00\00\00\00\02\t\00\00\00\00\00\00\00\00\00\00\00\00\00\00\08\1a\00\00\00\00\00\00\00\00\00\00\00\00\00\00")
- (table $0 4 funcref)
- (elem $0 (i32.const 1) $assembly/isotonic/lexsort~anonymous|0 $assembly/isotonic/lexsort~anonymous|1 $assembly/isotonic/inplaceIsotonicY~anonymous|0)
+ (data (i32.const 860) "\1c\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00")
+ (data (i32.const 892) "\1c\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00")
+ (data (i32.const 924) "\1c\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00")
+ (data (i32.const 956) "\1c\00\00\00\00\00\00\00\00\00\00\00\n\00\00\00\08\00\00\00\04\00\00\00\00\00\00\00\00\00\00\00")
+ (data (i32.const 988) "<\00\00\00\00\00\00\00\00\00\00\00\01\00\00\00*\00\00\00O\00b\00j\00e\00c\00t\00 \00a\00l\00r\00e\00a\00d\00y\00 \00p\00i\00n\00n\00e\00d\00\00\00")
+ (data (i32.const 1052) "<\00\00\00\00\00\00\00\00\00\00\00\01\00\00\00(\00\00\00O\00b\00j\00e\00c\00t\00 \00i\00s\00 \00n\00o\00t\00 \00p\00i\00n\00n\00e\00d\00\00\00\00\00")
+ (data (i32.const 1120) "\0b\00\00\00 \00\00\00\00\00\00\00 \00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\02\1a\00\00\00\00\00\00\02A\00\00\00\00\00\00\02\t\00\00\00\00\00\00\00\00\00\00\00\00\00\00\08\1a\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00")
+ (table $0 5 funcref)
+ (elem $0 (i32.const 1) $assembly/isotonic/lexsort~anonymous|0 $assembly/isotonic/lexsort~anonymous|1 $assembly/isotonic/inplaceIsotonicY~anonymous|0 $assembly/isotonic/__IsotonicRegression#constructor~anonymous|0)
+ (export "__IsotonicRegression" (global $assembly/isotonic/__IsotonicRegression))
  (export "xArrayID" (global $assembly/isotonic/xArrayID))
  (export "yArrayID" (global $assembly/isotonic/yArrayID))
  (export "wArrayID" (global $assembly/isotonic/wArrayID))
@@ -71,6 +79,29 @@
  (export "lexsort" (func $export:assembly/isotonic/lexsort@varargs))
  (export "makeUnique" (func $export:assembly/isotonic/makeUnique))
  (export "inplaceIsotonicY" (func $export:assembly/isotonic/inplaceIsotonicY))
+ (export "__IsotonicRegression#get:yMin" (func $export:assembly/isotonic/__IsotonicRegression#get:yMin))
+ (export "__IsotonicRegression#set:yMin" (func $export:assembly/isotonic/__IsotonicRegression#set:yMin))
+ (export "__IsotonicRegression#get:yMax" (func $export:assembly/isotonic/__IsotonicRegression#get:yMax))
+ (export "__IsotonicRegression#set:yMax" (func $export:assembly/isotonic/__IsotonicRegression#set:yMax))
+ (export "__IsotonicRegression#get:xMin" (func $export:assembly/isotonic/__IsotonicRegression#get:xMin))
+ (export "__IsotonicRegression#set:xMin" (func $export:assembly/isotonic/__IsotonicRegression#set:xMin))
+ (export "__IsotonicRegression#get:xMax" (func $export:assembly/isotonic/__IsotonicRegression#get:xMax))
+ (export "__IsotonicRegression#set:xMax" (func $export:assembly/isotonic/__IsotonicRegression#set:xMax))
+ (export "__IsotonicRegression#get:increasing" (func $export:assembly/isotonic/__IsotonicRegression#get:increasing))
+ (export "__IsotonicRegression#set:increasing" (func $export:assembly/isotonic/__IsotonicRegression#set:increasing))
+ (export "__IsotonicRegression#get:clipOutOfBound" (func $export:assembly/isotonic/__IsotonicRegression#get:clipOutOfBound))
+ (export "__IsotonicRegression#set:clipOutOfBound" (func $export:assembly/isotonic/__IsotonicRegression#set:clipOutOfBound))
+ (export "__IsotonicRegression#get:xThresholds" (func $export:assembly/isotonic/__IsotonicRegression#get:xThresholds))
+ (export "__IsotonicRegression#set:xThresholds" (func $export:assembly/isotonic/__IsotonicRegression#set:xThresholds))
+ (export "__IsotonicRegression#get:yThresholds" (func $export:assembly/isotonic/__IsotonicRegression#get:yThresholds))
+ (export "__IsotonicRegression#set:yThresholds" (func $export:assembly/isotonic/__IsotonicRegression#set:yThresholds))
+ (export "__IsotonicRegression#get:buildY" (func $export:assembly/isotonic/__IsotonicRegression#get:buildY))
+ (export "__IsotonicRegression#set:buildY" (func $export:assembly/isotonic/__IsotonicRegression#set:buildY))
+ (export "__IsotonicRegression#get:buildF" (func $export:assembly/isotonic/__IsotonicRegression#get:buildF))
+ (export "__IsotonicRegression#set:buildF" (func $export:assembly/isotonic/__IsotonicRegression#set:buildF))
+ (export "__IsotonicRegression#constructor" (func $export:assembly/isotonic/__IsotonicRegression#constructor))
+ (export "__IsotonicRegression#fit" (func $export:assembly/isotonic/__IsotonicRegression#fit))
+ (export "__IsotonicRegression#predict" (func $export:assembly/isotonic/__IsotonicRegression#predict))
  (start $~start)
  (func $~lib/rt/itcms/Object#set:nextWithColor (param $0 i32) (param $1 i32)
   local.get $0
@@ -4718,6 +4749,489 @@
   local.get $2
   call $~lib/array/Array<i32>#__uset
  )
+ (func $assembly/isotonic/__IsotonicRegression#set:yMin (param $0 i32) (param $1 f64)
+  local.get $0
+  local.get $1
+  f64.store
+ )
+ (func $assembly/isotonic/__IsotonicRegression#set:yMax (param $0 i32) (param $1 f64)
+  local.get $0
+  local.get $1
+  f64.store offset=8
+ )
+ (func $assembly/isotonic/__IsotonicRegression#set:increasing (param $0 i32) (param $1 i32)
+  local.get $0
+  local.get $1
+  i32.store8 offset=32
+ )
+ (func $assembly/isotonic/__IsotonicRegression#set:clipOutOfBound (param $0 i32) (param $1 i32)
+  local.get $0
+  local.get $1
+  i32.store8 offset=33
+ )
+ (func $assembly/isotonic/__IsotonicRegression#set:xThresholds (param $0 i32) (param $1 i32)
+  local.get $0
+  local.get $1
+  i32.store offset=36
+  local.get $0
+  local.get $1
+  i32.const 0
+  call $~lib/rt/itcms/__link
+ )
+ (func $assembly/isotonic/__IsotonicRegression#set:yThresholds (param $0 i32) (param $1 i32)
+  local.get $0
+  local.get $1
+  i32.store offset=40
+  local.get $0
+  local.get $1
+  i32.const 0
+  call $~lib/rt/itcms/__link
+ )
+ (func $assembly/isotonic/__IsotonicRegression#set:buildY (param $0 i32) (param $1 i32)
+  local.get $0
+  local.get $1
+  i32.store offset=44
+  local.get $0
+  local.get $1
+  i32.const 0
+  call $~lib/rt/itcms/__link
+ )
+ (func $assembly/isotonic/__IsotonicRegression#constructor~anonymous|0 (param $0 i32) (result i32)
+  local.get $0
+ )
+ (func $assembly/isotonic/__IsotonicRegression#set:buildF (param $0 i32) (param $1 i32)
+  local.get $0
+  local.get $1
+  i32.store offset=48
+  local.get $0
+  local.get $1
+  i32.const 0
+  call $~lib/rt/itcms/__link
+ )
+ (func $assembly/isotonic/__IsotonicRegression#set:xMin (param $0 i32) (param $1 f64)
+  local.get $0
+  local.get $1
+  f64.store offset=16
+ )
+ (func $assembly/isotonic/__IsotonicRegression#set:xMax (param $0 i32) (param $1 f64)
+  local.get $0
+  local.get $1
+  f64.store offset=24
+ )
+ (func $assembly/isotonic/__IsotonicRegression#get:yMin (param $0 i32) (result f64)
+  local.get $0
+  f64.load
+ )
+ (func $assembly/isotonic/__IsotonicRegression#get:yMax (param $0 i32) (result f64)
+  local.get $0
+  f64.load offset=8
+ )
+ (func $assembly/isotonic/__IsotonicRegression#get:xMin (param $0 i32) (result f64)
+  local.get $0
+  f64.load offset=16
+ )
+ (func $assembly/isotonic/__IsotonicRegression#get:xMax (param $0 i32) (result f64)
+  local.get $0
+  f64.load offset=24
+ )
+ (func $assembly/isotonic/__IsotonicRegression#get:increasing (param $0 i32) (result i32)
+  local.get $0
+  i32.load8_u offset=32
+ )
+ (func $assembly/isotonic/__IsotonicRegression#get:clipOutOfBound (param $0 i32) (result i32)
+  local.get $0
+  i32.load8_u offset=33
+ )
+ (func $assembly/isotonic/__IsotonicRegression#get:xThresholds (param $0 i32) (result i32)
+  local.get $0
+  i32.load offset=36
+ )
+ (func $assembly/isotonic/__IsotonicRegression#get:yThresholds (param $0 i32) (result i32)
+  local.get $0
+  i32.load offset=40
+ )
+ (func $assembly/isotonic/__IsotonicRegression#get:buildY (param $0 i32) (result i32)
+  local.get $0
+  i32.load offset=44
+ )
+ (func $assembly/isotonic/__IsotonicRegression#get:buildF (param $0 i32) (result i32)
+  local.get $0
+  i32.load offset=48
+ )
+ (func $~lib/array/Array<f64>#reverse (param $0 i32) (result i32)
+  (local $1 i32)
+  (local $2 i32)
+  (local $3 i32)
+  (local $4 i32)
+  (local $5 f64)
+  local.get $0
+  i32.load offset=12
+  local.set $1
+  local.get $1
+  if
+   local.get $0
+   i32.load offset=4
+   local.set $2
+   local.get $0
+   i32.load offset=4
+   local.get $1
+   i32.const 1
+   i32.sub
+   i32.const 3
+   i32.shl
+   i32.add
+   local.set $3
+   loop $while-continue|0
+    local.get $2
+    local.get $3
+    i32.lt_u
+    local.set $4
+    local.get $4
+    if
+     local.get $2
+     f64.load
+     local.set $5
+     local.get $2
+     local.get $3
+     f64.load
+     f64.store
+     local.get $3
+     local.get $5
+     f64.store
+     local.get $2
+     i32.const 8
+     i32.add
+     local.set $2
+     local.get $3
+     i32.const 8
+     i32.sub
+     local.set $3
+     br $while-continue|0
+    end
+   end
+  end
+  local.get $0
+ )
+ (func $~lib/array/Array<f64>#push (param $0 i32) (param $1 f64) (result i32)
+  (local $2 i32)
+  (local $3 i32)
+  local.get $0
+  i32.load offset=12
+  local.set $2
+  local.get $2
+  i32.const 1
+  i32.add
+  local.set $3
+  local.get $0
+  local.get $3
+  i32.const 3
+  i32.const 1
+  call $~lib/array/ensureCapacity
+  i32.const 0
+  drop
+  local.get $0
+  i32.load offset=4
+  local.get $2
+  i32.const 3
+  i32.shl
+  i32.add
+  local.get $1
+  f64.store
+  local.get $0
+  local.get $3
+  call $~lib/array/Array<f64>#set:length_
+  local.get $3
+ )
+ (func $assembly/isotonic/__IsotonicRegression#fit (param $0 i32) (param $1 i32) (param $2 i32) (param $3 i32)
+  (local $4 i32)
+  (local $5 i32)
+  (local $6 i32)
+  (local $7 i32)
+  (local $8 i32)
+  (local $9 i32)
+  (local $10 i32)
+  (local $11 i32)
+  (local $12 f64)
+  global.get $~lib/memory/__stack_pointer
+  i32.const 24
+  i32.sub
+  global.set $~lib/memory/__stack_pointer
+  call $~stack_check
+  global.get $~lib/memory/__stack_pointer
+  i64.const 0
+  i64.store
+  global.get $~lib/memory/__stack_pointer
+  i64.const 0
+  i64.store offset=8
+  global.get $~lib/memory/__stack_pointer
+  i64.const 0
+  i64.store offset=16
+  local.get $0
+  local.get $1
+  call $assembly/isotonic/__IsotonicRegression#set:xThresholds
+  local.get $0
+  local.get $2
+  call $assembly/isotonic/__IsotonicRegression#set:yThresholds
+  local.get $1
+  local.get $2
+  local.get $3
+  i32.const 1
+  call $assembly/isotonic/lexsort
+  global.get $~lib/memory/__stack_pointer
+  local.get $1
+  local.get $2
+  local.get $3
+  call $assembly/isotonic/makeUnique
+  local.tee $4
+  i32.store
+  global.get $~lib/memory/__stack_pointer
+  local.get $4
+  i32.const 0
+  call $~lib/array/Array<~lib/array/Array<f64>>#__get
+  local.tee $5
+  i32.store offset=4
+  global.get $~lib/memory/__stack_pointer
+  local.get $4
+  i32.const 1
+  call $~lib/array/Array<~lib/array/Array<f64>>#__get
+  local.tee $6
+  i32.store offset=8
+  global.get $~lib/memory/__stack_pointer
+  local.get $4
+  i32.const 2
+  call $~lib/array/Array<~lib/array/Array<f64>>#__get
+  local.tee $7
+  i32.store offset=12
+  local.get $0
+  i32.load8_u offset=32
+  i32.eqz
+  if
+   local.get $6
+   call $~lib/array/Array<f64>#reverse
+   drop
+   local.get $7
+   call $~lib/array/Array<f64>#reverse
+   drop
+  end
+  local.get $6
+  local.get $7
+  call $assembly/isotonic/inplaceIsotonicY
+  i32.const 0
+  local.set $8
+  loop $for-loop|0
+   local.get $8
+   local.get $6
+   call $~lib/array/Array<f64>#get:length
+   i32.lt_s
+   local.set $9
+   local.get $9
+   if
+    local.get $6
+    local.get $8
+    call $~lib/array/Array<f64>#__get
+    local.get $0
+    f64.load
+    f64.lt
+    if
+     local.get $6
+     local.get $8
+     local.get $0
+     f64.load
+     call $~lib/array/Array<f64>#__set
+    end
+    local.get $6
+    local.get $8
+    call $~lib/array/Array<f64>#__get
+    local.get $0
+    f64.load offset=8
+    f64.gt
+    if
+     local.get $6
+     local.get $8
+     local.get $0
+     f64.load offset=8
+     call $~lib/array/Array<f64>#__set
+    end
+    local.get $8
+    i32.const 1
+    i32.add
+    local.set $8
+    br $for-loop|0
+   end
+  end
+  local.get $0
+  i32.load8_u offset=32
+  i32.eqz
+  if
+   local.get $6
+   call $~lib/array/Array<f64>#reverse
+   drop
+  end
+  i32.const 0
+  local.set $8
+  loop $for-loop|1
+   local.get $8
+   local.get $5
+   call $~lib/array/Array<f64>#get:length
+   i32.lt_s
+   local.set $9
+   local.get $9
+   if
+    local.get $5
+    local.get $8
+    call $~lib/array/Array<f64>#__get
+    local.get $0
+    f64.load offset=24
+    f64.gt
+    if
+     local.get $0
+     local.get $5
+     local.get $8
+     call $~lib/array/Array<f64>#__get
+     call $assembly/isotonic/__IsotonicRegression#set:xMax
+    end
+    local.get $5
+    local.get $8
+    call $~lib/array/Array<f64>#__get
+    local.get $0
+    f64.load offset=16
+    f64.lt
+    if
+     local.get $0
+     local.get $5
+     local.get $8
+     call $~lib/array/Array<f64>#__get
+     call $assembly/isotonic/__IsotonicRegression#set:xMin
+    end
+    local.get $8
+    i32.const 1
+    i32.add
+    local.set $8
+    br $for-loop|1
+   end
+  end
+  global.get $~lib/memory/__stack_pointer
+  i32.const 0
+  i32.const 0
+  call $~lib/array/Array<f64>#constructor
+  local.tee $8
+  i32.store offset=16
+  global.get $~lib/memory/__stack_pointer
+  i32.const 0
+  i32.const 0
+  call $~lib/array/Array<f64>#constructor
+  local.tee $9
+  i32.store offset=20
+  local.get $8
+  local.get $5
+  i32.const 0
+  call $~lib/array/Array<f64>#__get
+  call $~lib/array/Array<f64>#push
+  drop
+  local.get $9
+  local.get $6
+  i32.const 0
+  call $~lib/array/Array<f64>#__get
+  call $~lib/array/Array<f64>#push
+  drop
+  i32.const 1
+  local.set $10
+  loop $for-loop|2
+   local.get $10
+   local.get $6
+   call $~lib/array/Array<f64>#get:length
+   i32.const 1
+   i32.sub
+   i32.lt_s
+   local.set $11
+   local.get $11
+   if
+    local.get $6
+    local.get $10
+    call $~lib/array/Array<f64>#__get
+    local.get $6
+    local.get $10
+    i32.const 1
+    i32.sub
+    call $~lib/array/Array<f64>#__get
+    f64.sub
+    local.set $12
+    local.get $12
+    f64.abs
+    f64.const 1e-06
+    f64.gt
+    if (result i32)
+     i32.const 1
+    else
+     local.get $6
+     local.get $10
+     call $~lib/array/Array<f64>#__get
+     local.get $6
+     local.get $10
+     i32.const 1
+     i32.add
+     call $~lib/array/Array<f64>#__get
+     f64.sub
+     local.set $12
+     local.get $12
+     f64.abs
+     f64.const 1e-06
+     f64.gt
+    end
+    if
+     local.get $8
+     local.get $5
+     local.get $10
+     call $~lib/array/Array<f64>#__get
+     call $~lib/array/Array<f64>#push
+     drop
+     local.get $9
+     local.get $6
+     local.get $10
+     call $~lib/array/Array<f64>#__get
+     call $~lib/array/Array<f64>#push
+     drop
+    end
+    local.get $10
+    i32.const 1
+    i32.add
+    local.set $10
+    br $for-loop|2
+   end
+  end
+  local.get $8
+  local.get $5
+  local.get $5
+  call $~lib/array/Array<f64>#get:length
+  i32.const 1
+  i32.sub
+  call $~lib/array/Array<f64>#__get
+  call $~lib/array/Array<f64>#push
+  drop
+  local.get $9
+  local.get $6
+  local.get $6
+  call $~lib/array/Array<f64>#get:length
+  i32.const 1
+  i32.sub
+  call $~lib/array/Array<f64>#__get
+  call $~lib/array/Array<f64>#push
+  drop
+  local.get $0
+  local.get $8
+  call $assembly/isotonic/__IsotonicRegression#set:xThresholds
+  local.get $0
+  local.get $9
+  call $assembly/isotonic/__IsotonicRegression#set:yThresholds
+  global.get $~lib/memory/__stack_pointer
+  i32.const 24
+  i32.add
+  global.set $~lib/memory/__stack_pointer
+ )
+ (func $assembly/isotonic/__IsotonicRegression#predict (param $0 i32) (param $1 i32) (result i32)
+  local.get $0
+  i32.load offset=40
+ )
  (func $assembly/isotonic/lexsort@varargs (param $0 i32) (param $1 i32) (param $2 i32) (param $3 i32)
   block $1of1
    block $0of1
@@ -4751,7 +5265,7 @@
    i32.const 3
    i32.eq
    if
-    i32.const 880
+    i32.const 1008
     i32.const 192
     i32.const 337
     i32.const 7
@@ -4783,7 +5297,7 @@
   i32.const 3
   i32.ne
   if
-   i32.const 944
+   i32.const 1072
    i32.const 192
    i32.const 351
    i32.const 5
@@ -4874,10 +5388,10 @@
   i32.const 128
   local.get $0
   call $~lib/rt/itcms/__visit
-  i32.const 880
+  i32.const 1008
   local.get $0
   call $~lib/rt/itcms/__visit
-  i32.const 944
+  i32.const 1072
   local.get $0
   call $~lib/rt/itcms/__visit
  )
@@ -5010,60 +5524,118 @@
   local.get $1
   call $~lib/function/Function<%28i32%2Ci32%2C~lib/array/Array<i32>%29=>i32>#__visit
  )
+ (func $assembly/isotonic/__IsotonicRegression~visit (param $0 i32) (param $1 i32)
+  (local $2 i32)
+  local.get $0
+  i32.load offset=36
+  local.tee $2
+  if
+   local.get $2
+   local.get $1
+   call $~lib/rt/itcms/__visit
+  end
+  local.get $0
+  i32.load offset=40
+  local.tee $2
+  if
+   local.get $2
+   local.get $1
+   call $~lib/rt/itcms/__visit
+  end
+  local.get $0
+  i32.load offset=44
+  local.tee $2
+  if
+   local.get $2
+   local.get $1
+   call $~lib/rt/itcms/__visit
+  end
+  local.get $0
+  i32.load offset=48
+  local.tee $2
+  if
+   local.get $2
+   local.get $1
+   call $~lib/rt/itcms/__visit
+  end
+ )
+ (func $~lib/function/Function<%28~lib/array/Array<f64>%29=>~lib/array/Array<f64>>#__visit (param $0 i32) (param $1 i32)
+  local.get $0
+  i32.load offset=4
+  local.get $1
+  call $~lib/rt/itcms/__visit
+ )
+ (func $~lib/function/Function<%28~lib/array/Array<f64>%29=>~lib/array/Array<f64>>~visit (param $0 i32) (param $1 i32)
+  local.get $0
+  local.get $1
+  call $~lib/function/Function<%28~lib/array/Array<f64>%29=>~lib/array/Array<f64>>#__visit
+ )
  (func $~lib/rt/__visit_members (param $0 i32) (param $1 i32)
   block $invalid
-   block $~lib/function/Function<%28i32%2Ci32%2C~lib/array/Array<i32>%29=>i32>
-    block $~lib/set/Set<f64>
-     block $~lib/function/Function<%28~lib/array/Array<f64>%2C~lib/array/Array<f64>%29=>i32>
-      block $~lib/array/Array<i32>
-       block $~lib/array/Array<~lib/array/Array<f64>>
-        block $~lib/array/Array<f64>
-         block $~lib/arraybuffer/ArrayBufferView
-          block $~lib/string/String
-           block $~lib/arraybuffer/ArrayBuffer
-            local.get $0
-            i32.const 8
-            i32.sub
-            i32.load
-            br_table $~lib/arraybuffer/ArrayBuffer $~lib/string/String $~lib/arraybuffer/ArrayBufferView $~lib/array/Array<f64> $~lib/array/Array<~lib/array/Array<f64>> $~lib/array/Array<i32> $~lib/function/Function<%28~lib/array/Array<f64>%2C~lib/array/Array<f64>%29=>i32> $~lib/set/Set<f64> $~lib/function/Function<%28i32%2Ci32%2C~lib/array/Array<i32>%29=>i32> $invalid
+   block $~lib/function/Function<%28~lib/array/Array<f64>%29=>~lib/array/Array<f64>>
+    block $assembly/isotonic/__IsotonicRegression
+     block $~lib/function/Function<%28i32%2Ci32%2C~lib/array/Array<i32>%29=>i32>
+      block $~lib/set/Set<f64>
+       block $~lib/function/Function<%28~lib/array/Array<f64>%2C~lib/array/Array<f64>%29=>i32>
+        block $~lib/array/Array<i32>
+         block $~lib/array/Array<~lib/array/Array<f64>>
+          block $~lib/array/Array<f64>
+           block $~lib/arraybuffer/ArrayBufferView
+            block $~lib/string/String
+             block $~lib/arraybuffer/ArrayBuffer
+              local.get $0
+              i32.const 8
+              i32.sub
+              i32.load
+              br_table $~lib/arraybuffer/ArrayBuffer $~lib/string/String $~lib/arraybuffer/ArrayBufferView $~lib/array/Array<f64> $~lib/array/Array<~lib/array/Array<f64>> $~lib/array/Array<i32> $~lib/function/Function<%28~lib/array/Array<f64>%2C~lib/array/Array<f64>%29=>i32> $~lib/set/Set<f64> $~lib/function/Function<%28i32%2Ci32%2C~lib/array/Array<i32>%29=>i32> $assembly/isotonic/__IsotonicRegression $~lib/function/Function<%28~lib/array/Array<f64>%29=>~lib/array/Array<f64>> $invalid
+             end
+             return
+            end
+            return
            end
+           local.get $0
+           local.get $1
+           call $~lib/arraybuffer/ArrayBufferView~visit
            return
           end
+          local.get $0
+          local.get $1
+          call $~lib/array/Array<f64>~visit
           return
          end
          local.get $0
          local.get $1
-         call $~lib/arraybuffer/ArrayBufferView~visit
+         call $~lib/array/Array<~lib/array/Array<f64>>~visit
          return
         end
         local.get $0
         local.get $1
-        call $~lib/array/Array<f64>~visit
+        call $~lib/array/Array<i32>~visit
         return
        end
        local.get $0
        local.get $1
-       call $~lib/array/Array<~lib/array/Array<f64>>~visit
+       call $~lib/function/Function<%28~lib/array/Array<f64>%2C~lib/array/Array<f64>%29=>i32>~visit
        return
       end
       local.get $0
       local.get $1
-      call $~lib/array/Array<i32>~visit
+      call $~lib/set/Set<f64>~visit
       return
      end
      local.get $0
      local.get $1
-     call $~lib/function/Function<%28~lib/array/Array<f64>%2C~lib/array/Array<f64>%29=>i32>~visit
+     call $~lib/function/Function<%28i32%2Ci32%2C~lib/array/Array<i32>%29=>i32>~visit
      return
     end
     local.get $0
     local.get $1
-    call $~lib/set/Set<f64>~visit
+    call $assembly/isotonic/__IsotonicRegression~visit
     return
    end
    local.get $0
    local.get $1
-   call $~lib/function/Function<%28i32%2Ci32%2C~lib/array/Array<i32>%29=>i32>~visit
+   call $~lib/function/Function<%28~lib/array/Array<f64>%29=>~lib/array/Array<f64>>~visit
    return
   end
   unreachable
@@ -5096,8 +5668,8 @@
   global.get $~lib/memory/__data_end
   i32.lt_s
   if
-   i32.const 17472
-   i32.const 17520
+   i32.const 17616
+   i32.const 17664
    i32.const 1
    i32.const 1
    call $~lib/builtins/abort
@@ -6387,6 +6959,109 @@
   global.set $~lib/memory/__stack_pointer
   local.get $8
  )
+ (func $assembly/isotonic/__IsotonicRegression#constructor (param $0 i32) (param $1 f64) (param $2 f64) (param $3 i32) (param $4 i32) (result i32)
+  (local $5 i32)
+  (local $6 i32)
+  (local $7 i32)
+  global.get $~lib/memory/__stack_pointer
+  i32.const 4
+  i32.sub
+  global.set $~lib/memory/__stack_pointer
+  call $~stack_check
+  global.get $~lib/memory/__stack_pointer
+  i32.const 0
+  i32.store
+  local.get $0
+  i32.eqz
+  if
+   global.get $~lib/memory/__stack_pointer
+   i32.const 52
+   i32.const 9
+   call $~lib/rt/itcms/__new
+   local.tee $0
+   i32.store
+  end
+  local.get $0
+  f64.const 0
+  call $assembly/isotonic/__IsotonicRegression#set:yMin
+  local.get $0
+  f64.const 0
+  call $assembly/isotonic/__IsotonicRegression#set:yMax
+  local.get $0
+  f64.const 0
+  call $assembly/isotonic/__IsotonicRegression#set:xMin
+  local.get $0
+  f64.const 0
+  call $assembly/isotonic/__IsotonicRegression#set:xMax
+  local.get $0
+  i32.const 0
+  call $assembly/isotonic/__IsotonicRegression#set:increasing
+  local.get $0
+  i32.const 0
+  call $assembly/isotonic/__IsotonicRegression#set:clipOutOfBound
+  local.get $0
+  i32.const 0
+  call $assembly/isotonic/__IsotonicRegression#set:xThresholds
+  local.get $0
+  i32.const 0
+  call $assembly/isotonic/__IsotonicRegression#set:yThresholds
+  local.get $0
+  i32.const 0
+  call $assembly/isotonic/__IsotonicRegression#set:buildY
+  local.get $0
+  i32.const 0
+  call $assembly/isotonic/__IsotonicRegression#set:buildF
+  local.get $0
+  local.get $1
+  call $assembly/isotonic/__IsotonicRegression#set:yMin
+  local.get $0
+  local.get $2
+  call $assembly/isotonic/__IsotonicRegression#set:yMax
+  local.get $0
+  local.get $3
+  call $assembly/isotonic/__IsotonicRegression#set:increasing
+  local.get $0
+  local.get $4
+  call $assembly/isotonic/__IsotonicRegression#set:clipOutOfBound
+  local.get $0
+  i32.const 0
+  i32.const 3
+  i32.const 3
+  i32.const 880
+  call $~lib/rt/__newArray
+  call $assembly/isotonic/__IsotonicRegression#set:xThresholds
+  local.get $0
+  i32.const 0
+  i32.const 3
+  i32.const 3
+  i32.const 912
+  call $~lib/rt/__newArray
+  call $assembly/isotonic/__IsotonicRegression#set:yThresholds
+  local.get $0
+  i32.const 0
+  i32.const 3
+  i32.const 3
+  i32.const 944
+  call $~lib/rt/__newArray
+  call $assembly/isotonic/__IsotonicRegression#set:buildY
+  local.get $0
+  i32.const 976
+  call $assembly/isotonic/__IsotonicRegression#set:buildF
+  local.get $0
+  f64.const inf
+  call $assembly/isotonic/__IsotonicRegression#set:xMin
+  local.get $0
+  f64.const inf
+  f64.neg
+  call $assembly/isotonic/__IsotonicRegression#set:xMax
+  local.get $0
+  local.set $7
+  global.get $~lib/memory/__stack_pointer
+  i32.const 4
+  i32.add
+  global.set $~lib/memory/__stack_pointer
+  local.get $7
+ )
  (func $export:assembly/isotonic/lexsort@varargs (param $0 i32) (param $1 i32) (param $2 i32) (param $3 i32)
   global.get $~lib/memory/__stack_pointer
   i32.const 12
@@ -6458,5 +7133,451 @@
   i32.const 8
   i32.add
   global.set $~lib/memory/__stack_pointer
+ )
+ (func $export:assembly/isotonic/__IsotonicRegression#get:yMin (param $0 i32) (result f64)
+  (local $1 f64)
+  global.get $~lib/memory/__stack_pointer
+  i32.const 4
+  i32.sub
+  global.set $~lib/memory/__stack_pointer
+  call $~stack_check
+  global.get $~lib/memory/__stack_pointer
+  local.get $0
+  i32.store
+  local.get $0
+  call $assembly/isotonic/__IsotonicRegression#get:yMin
+  local.set $1
+  global.get $~lib/memory/__stack_pointer
+  i32.const 4
+  i32.add
+  global.set $~lib/memory/__stack_pointer
+  local.get $1
+ )
+ (func $export:assembly/isotonic/__IsotonicRegression#set:yMin (param $0 i32) (param $1 f64)
+  global.get $~lib/memory/__stack_pointer
+  i32.const 4
+  i32.sub
+  global.set $~lib/memory/__stack_pointer
+  call $~stack_check
+  global.get $~lib/memory/__stack_pointer
+  local.get $0
+  i32.store
+  local.get $0
+  local.get $1
+  call $assembly/isotonic/__IsotonicRegression#set:yMin
+  global.get $~lib/memory/__stack_pointer
+  i32.const 4
+  i32.add
+  global.set $~lib/memory/__stack_pointer
+ )
+ (func $export:assembly/isotonic/__IsotonicRegression#get:yMax (param $0 i32) (result f64)
+  (local $1 f64)
+  global.get $~lib/memory/__stack_pointer
+  i32.const 4
+  i32.sub
+  global.set $~lib/memory/__stack_pointer
+  call $~stack_check
+  global.get $~lib/memory/__stack_pointer
+  local.get $0
+  i32.store
+  local.get $0
+  call $assembly/isotonic/__IsotonicRegression#get:yMax
+  local.set $1
+  global.get $~lib/memory/__stack_pointer
+  i32.const 4
+  i32.add
+  global.set $~lib/memory/__stack_pointer
+  local.get $1
+ )
+ (func $export:assembly/isotonic/__IsotonicRegression#set:yMax (param $0 i32) (param $1 f64)
+  global.get $~lib/memory/__stack_pointer
+  i32.const 4
+  i32.sub
+  global.set $~lib/memory/__stack_pointer
+  call $~stack_check
+  global.get $~lib/memory/__stack_pointer
+  local.get $0
+  i32.store
+  local.get $0
+  local.get $1
+  call $assembly/isotonic/__IsotonicRegression#set:yMax
+  global.get $~lib/memory/__stack_pointer
+  i32.const 4
+  i32.add
+  global.set $~lib/memory/__stack_pointer
+ )
+ (func $export:assembly/isotonic/__IsotonicRegression#get:xMin (param $0 i32) (result f64)
+  (local $1 f64)
+  global.get $~lib/memory/__stack_pointer
+  i32.const 4
+  i32.sub
+  global.set $~lib/memory/__stack_pointer
+  call $~stack_check
+  global.get $~lib/memory/__stack_pointer
+  local.get $0
+  i32.store
+  local.get $0
+  call $assembly/isotonic/__IsotonicRegression#get:xMin
+  local.set $1
+  global.get $~lib/memory/__stack_pointer
+  i32.const 4
+  i32.add
+  global.set $~lib/memory/__stack_pointer
+  local.get $1
+ )
+ (func $export:assembly/isotonic/__IsotonicRegression#set:xMin (param $0 i32) (param $1 f64)
+  global.get $~lib/memory/__stack_pointer
+  i32.const 4
+  i32.sub
+  global.set $~lib/memory/__stack_pointer
+  call $~stack_check
+  global.get $~lib/memory/__stack_pointer
+  local.get $0
+  i32.store
+  local.get $0
+  local.get $1
+  call $assembly/isotonic/__IsotonicRegression#set:xMin
+  global.get $~lib/memory/__stack_pointer
+  i32.const 4
+  i32.add
+  global.set $~lib/memory/__stack_pointer
+ )
+ (func $export:assembly/isotonic/__IsotonicRegression#get:xMax (param $0 i32) (result f64)
+  (local $1 f64)
+  global.get $~lib/memory/__stack_pointer
+  i32.const 4
+  i32.sub
+  global.set $~lib/memory/__stack_pointer
+  call $~stack_check
+  global.get $~lib/memory/__stack_pointer
+  local.get $0
+  i32.store
+  local.get $0
+  call $assembly/isotonic/__IsotonicRegression#get:xMax
+  local.set $1
+  global.get $~lib/memory/__stack_pointer
+  i32.const 4
+  i32.add
+  global.set $~lib/memory/__stack_pointer
+  local.get $1
+ )
+ (func $export:assembly/isotonic/__IsotonicRegression#set:xMax (param $0 i32) (param $1 f64)
+  global.get $~lib/memory/__stack_pointer
+  i32.const 4
+  i32.sub
+  global.set $~lib/memory/__stack_pointer
+  call $~stack_check
+  global.get $~lib/memory/__stack_pointer
+  local.get $0
+  i32.store
+  local.get $0
+  local.get $1
+  call $assembly/isotonic/__IsotonicRegression#set:xMax
+  global.get $~lib/memory/__stack_pointer
+  i32.const 4
+  i32.add
+  global.set $~lib/memory/__stack_pointer
+ )
+ (func $export:assembly/isotonic/__IsotonicRegression#get:increasing (param $0 i32) (result i32)
+  (local $1 i32)
+  global.get $~lib/memory/__stack_pointer
+  i32.const 4
+  i32.sub
+  global.set $~lib/memory/__stack_pointer
+  call $~stack_check
+  global.get $~lib/memory/__stack_pointer
+  local.get $0
+  i32.store
+  local.get $0
+  call $assembly/isotonic/__IsotonicRegression#get:increasing
+  local.set $1
+  global.get $~lib/memory/__stack_pointer
+  i32.const 4
+  i32.add
+  global.set $~lib/memory/__stack_pointer
+  local.get $1
+ )
+ (func $export:assembly/isotonic/__IsotonicRegression#set:increasing (param $0 i32) (param $1 i32)
+  global.get $~lib/memory/__stack_pointer
+  i32.const 4
+  i32.sub
+  global.set $~lib/memory/__stack_pointer
+  call $~stack_check
+  global.get $~lib/memory/__stack_pointer
+  local.get $0
+  i32.store
+  local.get $0
+  local.get $1
+  call $assembly/isotonic/__IsotonicRegression#set:increasing
+  global.get $~lib/memory/__stack_pointer
+  i32.const 4
+  i32.add
+  global.set $~lib/memory/__stack_pointer
+ )
+ (func $export:assembly/isotonic/__IsotonicRegression#get:clipOutOfBound (param $0 i32) (result i32)
+  (local $1 i32)
+  global.get $~lib/memory/__stack_pointer
+  i32.const 4
+  i32.sub
+  global.set $~lib/memory/__stack_pointer
+  call $~stack_check
+  global.get $~lib/memory/__stack_pointer
+  local.get $0
+  i32.store
+  local.get $0
+  call $assembly/isotonic/__IsotonicRegression#get:clipOutOfBound
+  local.set $1
+  global.get $~lib/memory/__stack_pointer
+  i32.const 4
+  i32.add
+  global.set $~lib/memory/__stack_pointer
+  local.get $1
+ )
+ (func $export:assembly/isotonic/__IsotonicRegression#set:clipOutOfBound (param $0 i32) (param $1 i32)
+  global.get $~lib/memory/__stack_pointer
+  i32.const 4
+  i32.sub
+  global.set $~lib/memory/__stack_pointer
+  call $~stack_check
+  global.get $~lib/memory/__stack_pointer
+  local.get $0
+  i32.store
+  local.get $0
+  local.get $1
+  call $assembly/isotonic/__IsotonicRegression#set:clipOutOfBound
+  global.get $~lib/memory/__stack_pointer
+  i32.const 4
+  i32.add
+  global.set $~lib/memory/__stack_pointer
+ )
+ (func $export:assembly/isotonic/__IsotonicRegression#get:xThresholds (param $0 i32) (result i32)
+  (local $1 i32)
+  global.get $~lib/memory/__stack_pointer
+  i32.const 4
+  i32.sub
+  global.set $~lib/memory/__stack_pointer
+  call $~stack_check
+  global.get $~lib/memory/__stack_pointer
+  local.get $0
+  i32.store
+  local.get $0
+  call $assembly/isotonic/__IsotonicRegression#get:xThresholds
+  local.set $1
+  global.get $~lib/memory/__stack_pointer
+  i32.const 4
+  i32.add
+  global.set $~lib/memory/__stack_pointer
+  local.get $1
+ )
+ (func $export:assembly/isotonic/__IsotonicRegression#set:xThresholds (param $0 i32) (param $1 i32)
+  global.get $~lib/memory/__stack_pointer
+  i32.const 8
+  i32.sub
+  global.set $~lib/memory/__stack_pointer
+  call $~stack_check
+  global.get $~lib/memory/__stack_pointer
+  local.get $0
+  i32.store
+  global.get $~lib/memory/__stack_pointer
+  local.get $1
+  i32.store offset=4
+  local.get $0
+  local.get $1
+  call $assembly/isotonic/__IsotonicRegression#set:xThresholds
+  global.get $~lib/memory/__stack_pointer
+  i32.const 8
+  i32.add
+  global.set $~lib/memory/__stack_pointer
+ )
+ (func $export:assembly/isotonic/__IsotonicRegression#get:yThresholds (param $0 i32) (result i32)
+  (local $1 i32)
+  global.get $~lib/memory/__stack_pointer
+  i32.const 4
+  i32.sub
+  global.set $~lib/memory/__stack_pointer
+  call $~stack_check
+  global.get $~lib/memory/__stack_pointer
+  local.get $0
+  i32.store
+  local.get $0
+  call $assembly/isotonic/__IsotonicRegression#get:yThresholds
+  local.set $1
+  global.get $~lib/memory/__stack_pointer
+  i32.const 4
+  i32.add
+  global.set $~lib/memory/__stack_pointer
+  local.get $1
+ )
+ (func $export:assembly/isotonic/__IsotonicRegression#set:yThresholds (param $0 i32) (param $1 i32)
+  global.get $~lib/memory/__stack_pointer
+  i32.const 8
+  i32.sub
+  global.set $~lib/memory/__stack_pointer
+  call $~stack_check
+  global.get $~lib/memory/__stack_pointer
+  local.get $0
+  i32.store
+  global.get $~lib/memory/__stack_pointer
+  local.get $1
+  i32.store offset=4
+  local.get $0
+  local.get $1
+  call $assembly/isotonic/__IsotonicRegression#set:yThresholds
+  global.get $~lib/memory/__stack_pointer
+  i32.const 8
+  i32.add
+  global.set $~lib/memory/__stack_pointer
+ )
+ (func $export:assembly/isotonic/__IsotonicRegression#get:buildY (param $0 i32) (result i32)
+  (local $1 i32)
+  global.get $~lib/memory/__stack_pointer
+  i32.const 4
+  i32.sub
+  global.set $~lib/memory/__stack_pointer
+  call $~stack_check
+  global.get $~lib/memory/__stack_pointer
+  local.get $0
+  i32.store
+  local.get $0
+  call $assembly/isotonic/__IsotonicRegression#get:buildY
+  local.set $1
+  global.get $~lib/memory/__stack_pointer
+  i32.const 4
+  i32.add
+  global.set $~lib/memory/__stack_pointer
+  local.get $1
+ )
+ (func $export:assembly/isotonic/__IsotonicRegression#set:buildY (param $0 i32) (param $1 i32)
+  global.get $~lib/memory/__stack_pointer
+  i32.const 8
+  i32.sub
+  global.set $~lib/memory/__stack_pointer
+  call $~stack_check
+  global.get $~lib/memory/__stack_pointer
+  local.get $0
+  i32.store
+  global.get $~lib/memory/__stack_pointer
+  local.get $1
+  i32.store offset=4
+  local.get $0
+  local.get $1
+  call $assembly/isotonic/__IsotonicRegression#set:buildY
+  global.get $~lib/memory/__stack_pointer
+  i32.const 8
+  i32.add
+  global.set $~lib/memory/__stack_pointer
+ )
+ (func $export:assembly/isotonic/__IsotonicRegression#get:buildF (param $0 i32) (result i32)
+  (local $1 i32)
+  global.get $~lib/memory/__stack_pointer
+  i32.const 4
+  i32.sub
+  global.set $~lib/memory/__stack_pointer
+  call $~stack_check
+  global.get $~lib/memory/__stack_pointer
+  local.get $0
+  i32.store
+  local.get $0
+  call $assembly/isotonic/__IsotonicRegression#get:buildF
+  local.set $1
+  global.get $~lib/memory/__stack_pointer
+  i32.const 4
+  i32.add
+  global.set $~lib/memory/__stack_pointer
+  local.get $1
+ )
+ (func $export:assembly/isotonic/__IsotonicRegression#set:buildF (param $0 i32) (param $1 i32)
+  global.get $~lib/memory/__stack_pointer
+  i32.const 8
+  i32.sub
+  global.set $~lib/memory/__stack_pointer
+  call $~stack_check
+  global.get $~lib/memory/__stack_pointer
+  local.get $0
+  i32.store
+  global.get $~lib/memory/__stack_pointer
+  local.get $1
+  i32.store offset=4
+  local.get $0
+  local.get $1
+  call $assembly/isotonic/__IsotonicRegression#set:buildF
+  global.get $~lib/memory/__stack_pointer
+  i32.const 8
+  i32.add
+  global.set $~lib/memory/__stack_pointer
+ )
+ (func $export:assembly/isotonic/__IsotonicRegression#constructor (param $0 i32) (param $1 f64) (param $2 f64) (param $3 i32) (param $4 i32) (result i32)
+  (local $5 i32)
+  global.get $~lib/memory/__stack_pointer
+  i32.const 4
+  i32.sub
+  global.set $~lib/memory/__stack_pointer
+  call $~stack_check
+  global.get $~lib/memory/__stack_pointer
+  local.get $0
+  i32.store
+  local.get $0
+  local.get $1
+  local.get $2
+  local.get $3
+  local.get $4
+  call $assembly/isotonic/__IsotonicRegression#constructor
+  local.set $5
+  global.get $~lib/memory/__stack_pointer
+  i32.const 4
+  i32.add
+  global.set $~lib/memory/__stack_pointer
+  local.get $5
+ )
+ (func $export:assembly/isotonic/__IsotonicRegression#fit (param $0 i32) (param $1 i32) (param $2 i32) (param $3 i32)
+  global.get $~lib/memory/__stack_pointer
+  i32.const 16
+  i32.sub
+  global.set $~lib/memory/__stack_pointer
+  call $~stack_check
+  global.get $~lib/memory/__stack_pointer
+  local.get $0
+  i32.store
+  global.get $~lib/memory/__stack_pointer
+  local.get $1
+  i32.store offset=4
+  global.get $~lib/memory/__stack_pointer
+  local.get $2
+  i32.store offset=8
+  global.get $~lib/memory/__stack_pointer
+  local.get $3
+  i32.store offset=12
+  local.get $0
+  local.get $1
+  local.get $2
+  local.get $3
+  call $assembly/isotonic/__IsotonicRegression#fit
+  global.get $~lib/memory/__stack_pointer
+  i32.const 16
+  i32.add
+  global.set $~lib/memory/__stack_pointer
+ )
+ (func $export:assembly/isotonic/__IsotonicRegression#predict (param $0 i32) (param $1 i32) (result i32)
+  (local $2 i32)
+  global.get $~lib/memory/__stack_pointer
+  i32.const 8
+  i32.sub
+  global.set $~lib/memory/__stack_pointer
+  call $~stack_check
+  global.get $~lib/memory/__stack_pointer
+  local.get $0
+  i32.store
+  global.get $~lib/memory/__stack_pointer
+  local.get $1
+  i32.store offset=4
+  local.get $0
+  local.get $1
+  call $assembly/isotonic/__IsotonicRegression#predict
+  local.set $2
+  global.get $~lib/memory/__stack_pointer
+  i32.const 8
+  i32.add
+  global.set $~lib/memory/__stack_pointer
+  local.get $2
  )
 )
