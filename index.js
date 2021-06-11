@@ -4,7 +4,9 @@ const loader = require('@assemblyscript/loader');
 
 const imports = { /* imports go here */ };
 const wasmModule = loader.instantiateSync(
+  // Use untouched.wasm for development, use optimized.wasm for distribution/external use
   fs.readFileSync(__dirname + '/build/untouched.wasm'),
+  // fs.readFileSync(__dirname + '/build/optimized.wasm'),
   imports
 );
 
@@ -138,6 +140,12 @@ class IsotonicRegression {
     __pin(this.iso);
   }
 
+  /**
+   * Fit an isotonic regression on the given x, y, w data.
+   * @param {[number]} x x array
+   * @param {[number]} y y array
+   * @param {[number]} w weight array
+   */
   fit(x, y, w = undefined) {
     // If sample weight is not given, replace them with [1, 1 ... 1]
     let sampleWeight = w;
@@ -162,6 +170,12 @@ class IsotonicRegression {
     __unpin(wPtr);
   }
 
+
+  /**
+   * Use the trained isotonic regression model to predict on the new data
+   * @param {[number]} newX new data array
+   * @returns predictions, same size as `newX`
+   */
   predict(newX) {
     // Pass newX to WASM to predict
     let newXPtr = __pin(__newArray(wasm.newXArrayID, newX));

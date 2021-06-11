@@ -286,6 +286,12 @@ export class __IsotonicRegression {
     this.xMax = -Infinity;
   };
 
+  /**
+   * Fit an isotonic regression.
+   * @param x x array
+   * @param y y array
+   * @param w weight array
+   */
   fit(x: Array<f64>, y: Array<f64>, w: Array<f64>): void {
     // Sort the x, y, w arrays by x and y
     lexsort(x, y, w);
@@ -356,6 +362,11 @@ export class __IsotonicRegression {
     this.yThresholds = cleanedUniqueY;
   };
 
+  /**
+   * Use the trained isotonic regression model to predict on the new data
+   * @param newX new data array
+   * @returns predictions, same size as `newX`
+   */
   predict(newX: Array<f64>): Float64Array {
 
     let predictions = new Float64Array(newX.length);
