@@ -1,4 +1,4 @@
-const myModule = require('..');
+const myModule = require('../..');
 
 const utils = require('./utils');
 

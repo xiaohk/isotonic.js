@@ -1,3 +1,5 @@
+'use strict';
+
 const fs = require('fs');
 
 const loader = require('@assemblyscript/loader');
@@ -232,4 +234,3 @@ module.exports.__searchsorted = __searchsorted;
 
 // Overwrite the WASM IsotonicRegression with JS IsotonicRegression wrapper
 module.exports.IsotonicRegression = IsotonicRegression;
-

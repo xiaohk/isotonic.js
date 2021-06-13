@@ -1,7 +1,5 @@
-/* eslint-disable promise/catch-or-return */
+const myModule = require('../..');
 const fetch = require('node-fetch');
-
-const myModule = require('..');
 
 const utils = require('./utils');
 
@@ -105,7 +103,7 @@ let expected3 = [
   5.735, 5.735, 5.32941176, 5.32941176, 5.735,
   5.735, 5.735, 5.32941176, 5.735, 5.93333333,
   5.735, 5.32941176, 5.55, 5.735, 5.32941176
-]
+];
 
 let model = null;
 
@@ -113,7 +111,7 @@ console.log(`\n--- Start testing ${name} ---`);
 
 
 const testIris = async () => {
-  let url = 'https://gist.githubusercontent.com/xiaohk/b5b44e0963247b90d7e9a8e1272efa78/raw/d81dbc0ca7631b8fd1d35bb5651b2d87c2eea337/iris.json'
+  let url = 'https://gist.githubusercontent.com/xiaohk/b5b44e0963247b90d7e9a8e1272efa78/raw/d81dbc0ca7631b8fd1d35bb5651b2d87c2eea337/iris.json';
   let setting = { method: 'Get' };
 
   let res = await fetch(url, setting);

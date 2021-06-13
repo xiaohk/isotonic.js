@@ -2,9 +2,16 @@
   "name": "isotonic",
   "version": "0.5.0",
   "description": "Isotonic Regression with WebAssembly",
-  "main": "index.js",
+  "main": "dist/cjs/index.js",
+  "module": "dist/mjs/index.js",
+  "exports": {
+    ".": {
+      "require": "./dist/cjs/index.js",
+      "import": "./dist/mjs/index.js"
+    }
+  },
   "scripts": {
-    "test": "npm run build && node tests",
+    "test": "rollup -c && npm run build && node tests/cjs",
     "asbuild:untouched": "asc assembly/isotonic.ts --target debug",
     "asbuild:optimized": "asc assembly/isotonic.ts --target release",
     "asbuild": "npm run asbuild:untouched && npm run asbuild:optimized",
@@ -13,12 +20,13 @@
   "author": "Jay Wang",
   "license": "MIT",
   "dependencies": {
-    "@assemblyscript/loader": "^0.19.1"
+    "@assemblyscript/loader": "^0.19.1",
+    "cross-fetch": "^3.1.4"
   },
   "devDependencies": {
+    "@rollup/plugin-wasm": "^5.1.2",
     "@shopify/eslint-plugin": "^40.2.3",
     "assemblyscript": "^0.19.1",
-    "eslint": "^7.28.0",
-    "node-fetch": "^2.6.1"
+    "eslint": "^7.28.0"
   }
 }

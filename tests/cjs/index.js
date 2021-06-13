@@ -1,5 +1,5 @@
 // The entry file of all unite tests.
-const myModule = require('..');
+const myModule = require('../..');
 
 // --- Testing ---
 console.log('Start testing...');
@@ -33,7 +33,8 @@ myModule.__collect();
 
 // --- Testing on the Iris dataset ---
 const iris = require('./iris.test');
+
 iris.testIris()
-  .then(() => { console.log('\nPassed all the tests!'); })
+  .then(() => { console.log('\nPassed all the tests!'); });
 
 
