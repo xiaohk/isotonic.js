@@ -24,6 +24,7 @@
     "cross-fetch": "^3.1.4"
   },
   "devDependencies": {
+    "@rollup/plugin-node-resolve": "^13.0.0",
     "@rollup/plugin-wasm": "^5.1.2",
     "@shopify/eslint-plugin": "^40.2.3",
     "assemblyscript": "^0.19.1",
