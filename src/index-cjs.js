@@ -186,6 +186,13 @@ class IsotonicRegression {
   }
 
   /**
+   * Reset the learned weights of this isotonic regression model.
+   */
+  reset() {
+    this.iso.reset();
+  }
+
+  /**
    * Run this function when the model is no longer needed. It is necessary because
    * WASM won't garbage collect the model until we manually __unpin() it from JS
    * (memory leak)

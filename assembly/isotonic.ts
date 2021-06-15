@@ -409,6 +409,18 @@ export class __IsotonicRegression {
 
     return predictions;
   };
+
+  /**
+   * Reinitialize this model
+   */
+  reset(): void {
+    this.xThresholds = [];
+    this.yThresholds = [];
+    this.buildY = [];
+    this.buildF = (x: Array<f64>) => x;
+    this.xMin = Infinity;
+    this.xMax = -Infinity;
+  };
 }
 
 // We need unique array id so we can allocate them in JS

@@ -1,6 +1,8 @@
 import { nodeResolve } from '@rollup/plugin-node-resolve';
+import { wasm } from '@rollup/plugin-wasm';
 
-export default [{
+export default
+[{
   input: 'src/index-cjs.js',
   output: {
     file: 'dist/cjs/index.js',
@@ -14,5 +16,8 @@ export default [{
     file: 'dist/mjs/index.js',
     format: 'es'
   },
-  plugins: [nodeResolve()],
+  plugins: [
+    wasm(),
+    nodeResolve()
+  ],
 }];

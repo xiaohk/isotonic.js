@@ -2,8 +2,8 @@
  (type $i32_i32_=>_none (func (param i32 i32)))
  (type $i32_=>_i32 (func (param i32) (result i32)))
  (type $i32_i32_=>_i32 (func (param i32 i32) (result i32)))
- (type $i32_i32_i32_=>_none (func (param i32 i32 i32)))
  (type $i32_=>_none (func (param i32)))
+ (type $i32_i32_i32_=>_none (func (param i32 i32 i32)))
  (type $i32_f64_=>_none (func (param i32 f64)))
  (type $i32_i32_i32_i32_=>_none (func (param i32 i32 i32 i32)))
  (type $none_=>_none (func))
@@ -33,8 +33,8 @@
  (global $~lib/rt/tlsf/ROOT (mut i32) (i32.const 0))
  (global $~argumentsLength (mut i32) (i32.const 0))
  (global $assembly/isotonic/__IsotonicRegression i32 (i32.const 9))
- (global $~lib/rt/__rtti_base i32 (i32.const 2208))
- (global $~lib/memory/__stack_pointer (mut i32) (i32.const 18692))
+ (global $~lib/rt/__rtti_base i32 (i32.const 2336))
+ (global $~lib/memory/__stack_pointer (mut i32) (i32.const 18820))
  (memory $0 1)
  (data (i32.const 1036) ",")
  (data (i32.const 1048) "\01\00\00\00\1c\00\00\00I\00n\00v\00a\00l\00i\00d\00 \00l\00e\00n\00g\00t\00h")
@@ -69,16 +69,21 @@
  (data (i32.const 1992) "\n\00\00\00\08\00\00\00\04")
  (data (i32.const 2012) "<")
  (data (i32.const 2024) "\01\00\00\00$\00\00\00~\00l\00i\00b\00/\00t\00y\00p\00e\00d\00a\00r\00r\00a\00y\00.\00t\00s")
- (data (i32.const 2076) "<")
- (data (i32.const 2088) "\01\00\00\00*\00\00\00O\00b\00j\00e\00c\00t\00 \00a\00l\00r\00e\00a\00d\00y\00 \00p\00i\00n\00n\00e\00d")
- (data (i32.const 2140) "<")
- (data (i32.const 2152) "\01\00\00\00(\00\00\00O\00b\00j\00e\00c\00t\00 \00i\00s\00 \00n\00o\00t\00 \00p\00i\00n\00n\00e\00d")
- (data (i32.const 2208) "\0c\00\00\00 \00\00\00\00\00\00\00 ")
- (data (i32.const 2236) "\02\1a\00\00\00\00\00\00\02A\00\00\00\00\00\00\02\t")
- (data (i32.const 2268) "\08\1a")
- (data (i32.const 2300) "\01\1a\00\00\02")
- (table $0 5 funcref)
- (elem $0 (i32.const 1) $assembly/isotonic/lexsort~anonymous|0 $assembly/isotonic/lexsort~anonymous|1 $assembly/isotonic/inplaceIsotonicY~anonymous|0 $assembly/isotonic/__IsotonicRegression#constructor~anonymous|0)
+ (data (i32.const 2076) "\1c")
+ (data (i32.const 2108) "\1c")
+ (data (i32.const 2140) "\1c")
+ (data (i32.const 2172) "\1c")
+ (data (i32.const 2184) "\n\00\00\00\08\00\00\00\05")
+ (data (i32.const 2204) "<")
+ (data (i32.const 2216) "\01\00\00\00*\00\00\00O\00b\00j\00e\00c\00t\00 \00a\00l\00r\00e\00a\00d\00y\00 \00p\00i\00n\00n\00e\00d")
+ (data (i32.const 2268) "<")
+ (data (i32.const 2280) "\01\00\00\00(\00\00\00O\00b\00j\00e\00c\00t\00 \00i\00s\00 \00n\00o\00t\00 \00p\00i\00n\00n\00e\00d")
+ (data (i32.const 2336) "\0c\00\00\00 \00\00\00\00\00\00\00 ")
+ (data (i32.const 2364) "\02\1a\00\00\00\00\00\00\02A\00\00\00\00\00\00\02\t")
+ (data (i32.const 2396) "\08\1a")
+ (data (i32.const 2428) "\01\1a\00\00\02")
+ (table $0 6 funcref)
+ (elem $0 (i32.const 1) $assembly/isotonic/lexsort~anonymous|0 $assembly/isotonic/lexsort~anonymous|1 $assembly/isotonic/inplaceIsotonicY~anonymous|0 $assembly/isotonic/__IsotonicRegression#constructor~anonymous|0 $assembly/isotonic/__IsotonicRegression#constructor~anonymous|0)
  (export "__IsotonicRegression" (global $assembly/isotonic/__IsotonicRegression))
  (export "xArrayID" (global $assembly/isotonic/xArrayID))
  (export "yArrayID" (global $assembly/isotonic/yArrayID))
@@ -118,6 +123,7 @@
  (export "__IsotonicRegression#constructor" (func $export:assembly/isotonic/__IsotonicRegression#constructor))
  (export "__IsotonicRegression#fit" (func $export:assembly/isotonic/__IsotonicRegression#fit))
  (export "__IsotonicRegression#predict" (func $export:assembly/isotonic/__IsotonicRegression#predict))
+ (export "__IsotonicRegression#reset" (func $export:assembly/isotonic/__IsotonicRegression#reset))
  (start $~start)
  (func $~lib/rt/itcms/initLazy (param $0 i32) (result i32)
   local.get $0
@@ -139,9 +145,9 @@
   call $~lib/rt/itcms/__visit
   i32.const 1152
   call $~lib/rt/itcms/__visit
-  i32.const 2096
+  i32.const 2224
   call $~lib/rt/itcms/__visit
-  i32.const 2160
+  i32.const 2288
   call $~lib/rt/itcms/__visit
   global.get $~lib/rt/itcms/pinSpace
   local.tee $1
@@ -212,7 +218,7 @@
   if
    i32.const 0
    local.get $0
-   i32.const 18692
+   i32.const 18820
    i32.lt_u
    local.get $0
    i32.load offset=8
@@ -303,7 +309,7 @@
    i32.const 1
   else
    local.get $0
-   i32.const 2208
+   i32.const 2336
    i32.load
    i32.gt_u
    if
@@ -317,7 +323,7 @@
    local.get $0
    i32.const 3
    i32.shl
-   i32.const 2212
+   i32.const 2340
    i32.add
    i32.load
    i32.const 32
@@ -895,10 +901,10 @@
   if
    unreachable
   end
-  i32.const 18704
+  i32.const 18832
   i32.const 0
   i32.store
-  i32.const 20272
+  i32.const 20400
   i32.const 0
   i32.store
   loop $for-loop|0
@@ -909,7 +915,7 @@
     local.get $1
     i32.const 2
     i32.shl
-    i32.const 18704
+    i32.const 18832
     i32.add
     i32.const 0
     i32.store offset=4
@@ -927,7 +933,7 @@
       i32.add
       i32.const 2
       i32.shl
-      i32.const 18704
+      i32.const 18832
       i32.add
       i32.const 0
       i32.store offset=96
@@ -945,13 +951,13 @@
     br $for-loop|0
    end
   end
-  i32.const 18704
-  i32.const 20276
+  i32.const 18832
+  i32.const 20404
   memory.size
   i32.const 16
   i32.shl
   call $~lib/rt/tlsf/addMemory
-  i32.const 18704
+  i32.const 18832
   global.set $~lib/rt/tlsf/ROOT
  )
  (func $~lib/rt/itcms/step (result i32)
@@ -1030,7 +1036,7 @@
       local.set $0
       loop $while-continue|0
        local.get $0
-       i32.const 18692
+       i32.const 18820
        i32.lt_u
        if
         local.get $0
@@ -1120,7 +1126,7 @@
       unreachable
      end
      local.get $0
-     i32.const 18692
+     i32.const 18820
      i32.lt_u
      if
       local.get $0
@@ -1143,7 +1149,7 @@
       i32.const 4
       i32.add
       local.tee $1
-      i32.const 18692
+      i32.const 18820
       i32.ge_u
       if
        global.get $~lib/rt/tlsf/ROOT
@@ -3229,7 +3235,7 @@
    i32.const 3
    i32.eq
    if
-    i32.const 2096
+    i32.const 2224
     i32.const 1216
     i32.const 337
     i32.const 7
@@ -3261,7 +3267,7 @@
   i32.const 3
   i32.ne
   if
-   i32.const 2160
+   i32.const 2288
    i32.const 1216
    i32.const 351
    i32.const 5
@@ -3440,7 +3446,7 @@
   memory.size
   i32.const 16
   i32.shl
-  i32.const 18692
+  i32.const 18820
   i32.sub
   i32.const 1
   i32.shr_u
@@ -3457,11 +3463,11 @@
  )
  (func $~stack_check
   global.get $~lib/memory/__stack_pointer
-  i32.const 2308
+  i32.const 2436
   i32.lt_s
   if
-   i32.const 18720
-   i32.const 18768
+   i32.const 18848
+   i32.const 18896
    i32.const 1
    i32.const 1
    call $~lib/builtins/abort
@@ -5442,6 +5448,50 @@
   call $assembly/isotonic/__IsotonicRegression#predict
   global.get $~lib/memory/__stack_pointer
   i32.const 8
+  i32.add
+  global.set $~lib/memory/__stack_pointer
+ )
+ (func $export:assembly/isotonic/__IsotonicRegression#reset (param $0 i32)
+  global.get $~lib/memory/__stack_pointer
+  i32.const 4
+  i32.sub
+  global.set $~lib/memory/__stack_pointer
+  call $~stack_check
+  global.get $~lib/memory/__stack_pointer
+  local.get $0
+  i32.store
+  local.get $0
+  i32.const 0
+  i32.const 3
+  i32.const 3
+  i32.const 2096
+  call $~lib/rt/__newArray
+  call $assembly/isotonic/__IsotonicRegression#set:xThresholds
+  local.get $0
+  i32.const 0
+  i32.const 3
+  i32.const 3
+  i32.const 2128
+  call $~lib/rt/__newArray
+  call $assembly/isotonic/__IsotonicRegression#set:yThresholds
+  local.get $0
+  i32.const 0
+  i32.const 3
+  i32.const 3
+  i32.const 2160
+  call $~lib/rt/__newArray
+  call $assembly/isotonic/__IsotonicRegression#set:buildY
+  local.get $0
+  i32.const 2192
+  call $assembly/isotonic/__IsotonicRegression#set:buildF
+  local.get $0
+  f64.const inf
+  f64.store offset=16
+  local.get $0
+  f64.const -inf
+  f64.store offset=24
+  global.get $~lib/memory/__stack_pointer
+  i32.const 4
   i32.add
   global.set $~lib/memory/__stack_pointer
  )

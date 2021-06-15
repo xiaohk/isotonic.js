@@ -438,9 +438,17 @@ var loader = {
   demangle
 };
 
+// import { sample } from '../build/optimized.wasm';
+
+// export const testWASM = () => {
+//   sample({}).then((result) => {
+//     console.log(result);
+//   });
+// };
+
 const initIsotonicRegression = () => {
   return loader.instantiate(
-    fetch('/build/untouched.wasm').then((result) => result.arrayBuffer()),
+    fetch('/build/optimized.wasm').then((result) => result.arrayBuffer()),
     {}
   ).then(({ exports }) => {
     const wasm = exports;
@@ -514,6 +522,13 @@ const initIsotonicRegression = () => {
 
         __unpin(newXPtr);
         return predictedXArray;
+      }
+
+      /**
+       * Reset the learned weights of this isotonic regression model.
+       */
+      reset() {
+        this.iso.reset();
       }
 
       /**
