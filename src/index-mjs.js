@@ -1,7 +1,7 @@
 import loader from '@assemblyscript/loader';
 import wasmB64 from '../build/optimized.wasm';
 
-export const initIsotonicRegression = () => {
+export const initIsotonicRegression = (increasing) => {
   const wasmB64URL = 'data:application/octet-binary;base64,' + wasmB64;
 
   return loader.instantiate(
@@ -124,7 +124,7 @@ export const initIsotonicRegression = () => {
       }
     }
 
-    let model = new IsotonicRegression();
+    let model = new IsotonicRegression({ increasing: increasing });
     return model;
 
   });
