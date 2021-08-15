@@ -1,23 +1,38 @@
 import { nodeResolve } from '@rollup/plugin-node-resolve';
-import { wasm } from '@rollup/plugin-wasm';
+import { base64 } from 'rollup-plugin-base64';
+import { terser } from 'rollup-plugin-terser';
 
 export default
-[{
-  input: 'src/index-cjs.js',
-  output: {
-    file: 'dist/cjs/index.js',
-    format: 'cjs'
+[
+  {
+    input: 'src/index-cjs.js',
+    output: {
+      file: 'dist/cjs/isotonic.js',
+      format: 'cjs'
+    },
+    plugins: [],
   },
-  plugins: [],
-},
-{
-  input: 'src/index-mjs.js',
-  output: {
-    file: 'dist/mjs/index.js',
-    format: 'es'
+  {
+    input: 'src/index-mjs.js',
+    output: {
+      file: 'dist/mjs/isotonic.js',
+      format: 'es'
+    },
+    plugins: [
+      nodeResolve(),
+      base64({ include: '**/*.wasm' }),
+    ],
   },
-  plugins: [
-    wasm(),
-    nodeResolve()
-  ],
-}];
+  {
+    input: 'src/index-mjs.js',
+    output: {
+      file: 'dist/mjs/isotonic.min.js',
+      format: 'es'
+    },
+    plugins: [
+      nodeResolve(),
+      base64({ include: '**/*.wasm' }),
+      terser()
+    ],
+  }
+];

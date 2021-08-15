@@ -1,15 +1,11 @@
 import loader from '@assemblyscript/loader';
-// import { sample } from '../build/optimized.wasm';
-
-// export const testWASM = () => {
-//   sample({}).then((result) => {
-//     console.log(result);
-//   });
-// };
+import wasmB64 from '../build/optimized.wasm';
 
 export const initIsotonicRegression = () => {
+  const wasmB64URL = 'data:application/octet-binary;base64,' + wasmB64;
+
   return loader.instantiate(
-    fetch('/build/optimized.wasm').then((result) => result.arrayBuffer()),
+    fetch(wasmB64URL).then((result) => result.arrayBuffer()),
     {}
   ).then(({ exports }) => {
     const wasm = exports;
