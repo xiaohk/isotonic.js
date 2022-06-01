@@ -1,6 +1,6 @@
 {
   "name": "isotonic",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "description": "Isotonic Regression with WebAssembly",
   "main": "dist/cjs/isotonic.js",
   "module": "dist/mjs/isotonic.min.js",
